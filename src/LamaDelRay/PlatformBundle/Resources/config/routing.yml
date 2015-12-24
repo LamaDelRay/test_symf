@@ -1,0 +1,31 @@
+platform_home:
+    path:	/{page}
+    defaults:
+        _controller :	LamaDelRayPlatformBundle:Advert:index
+        page:			1
+    requirements:
+        page: \d*
+
+
+platform_view:
+    path:	/advert/{id}
+    defaults:	{ _controller : LamaDelRayPlatformBundle:Advert:view }
+    requirements:
+        id: \d+
+
+platform_add:
+    path:	/add
+    defaults:	{ _controller : LamaDelRayPlatformBundle:Advert:add }
+
+platform_view_slug:
+    path:      /{year}/{slug}.{format}
+    defaults:
+        _controller: LamaDelRayPlatformBundle:Advert:viewSlug
+        format: html
+    requirements:
+        year:	\d{4}
+        format: html|xml
+
+hello_world:
+    path:     /hello_world/
+    defaults: { _controller: LamaDelRayPlatformBundle:Advert:index }

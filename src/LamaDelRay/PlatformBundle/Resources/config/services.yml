@@ -1,0 +1,4 @@
+services:
+#    lama_del_ray_platform.example:
+#        class: LamaDelRay\PlatformBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

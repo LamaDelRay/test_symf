@@ -105,13 +105,43 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // homepage
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'homepage');
+        if (0 === strpos($pathinfo, '/platform')) {
+            // platform_home
+            if (rtrim($pathinfo, '/') === '/platform') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'platform_home');
+                }
+
+                return array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::indexAction',  '_route' => 'platform_home',);
             }
 
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
+            if (0 === strpos($pathinfo, '/platform/ad')) {
+                // platform_view
+                if (0 === strpos($pathinfo, '/platform/advert') && preg_match('#^/platform/advert/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_view')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::viewAction',));
+                }
+
+                // platform_add
+                if ($pathinfo === '/platform/add') {
+                    return array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::addAction',  '_route' => 'platform_add',);
+                }
+
+            }
+
+            // platform_view_slug
+            if (preg_match('#^/platform/(?P<year>\\d{4})/(?P<slug>[^/\\.]++)(?:\\.(?P<format>html|xml))?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_view_slug')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::viewSlugAction',  'format' => 'html',));
+            }
+
+            // hello_world
+            if (rtrim($pathinfo, '/') === '/platform/hello_world') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'hello_world');
+                }
+
+                return array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::indexAction',  '_route' => 'hello_world',);
+            }
+
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

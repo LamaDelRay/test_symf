@@ -1,3 +1,4 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+lama_del_ray_platform:
+    resource: "@LamaDelRayPlatformBundle/Resources/config/routing.yml"
+    prefix:   /platform
+
