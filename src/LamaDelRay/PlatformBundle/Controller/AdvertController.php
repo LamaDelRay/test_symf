@@ -61,6 +61,13 @@ class AdvertController extends Controller
 
 	public function addAction(Request $request)
 	{
+		$antispam  = $this->container->get('LamaDelRay_platform.antispam');
+
+		$text = '...';
+		if ($antispam->isSpam($text)) {
+			throw new \Exception('Votre message a été détecté comme spam !');
+		}
+
 		if ($request->isMethod('POST')){
 			$request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 			return $this->redirectToRoute('platform_view', array('id' => 5));

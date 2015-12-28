@@ -2,3 +2,9 @@ services:
 #    lama_del_ray_platform.example:
 #        class: LamaDelRay\PlatformBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+services:
+    LamaDelRay_platform.antispam:
+        class: LamaDelRay\PlatformBundle\Antispam\LamaDelRayAntispam
+        arguments: [@mailer, %locale%, 50]
+
