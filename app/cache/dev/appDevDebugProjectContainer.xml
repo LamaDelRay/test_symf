@@ -506,7 +506,7 @@
     <parameter key="twig.extension.webprofiler.class">Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension</parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="web_profiler.debug_toolbar.class">Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener</parameter>
-    <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
+    <parameter key="web_profiler.debug_toolbar.intercept_redirects">true</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
@@ -557,13 +557,13 @@
         <parameter>db</parameter>
         <parameter>@Doctrine/Collector/db.html.twig</parameter>
       </parameter>
-      <parameter key="data_collector.dump" type="collection">
-        <parameter>dump</parameter>
-        <parameter>@Debug/Profiler/dump.html.twig</parameter>
-      </parameter>
       <parameter key="swiftmailer.data_collector" type="collection">
         <parameter>swiftmailer</parameter>
         <parameter>@Swiftmailer/Collector/swiftmailer.html.twig</parameter>
+      </parameter>
+      <parameter key="data_collector.dump" type="collection">
+        <parameter>dump</parameter>
+        <parameter>@Debug/Profiler/dump.html.twig</parameter>
       </parameter>
       <parameter key="data_collector.config" type="collection">
         <parameter>config</parameter>
@@ -1454,15 +1454,15 @@
         </argument>
       </call>
       <call method="add">
-        <argument type="service" id="data_collector.dump"/>
-      </call>
-      <call method="add">
         <argument type="service">
           <service class="Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector" public="false">
-            <tag name="data_collector" template="@Swiftmailer/Collector/swiftmailer.html.twig" id="swiftmailer"/>
+            <tag name="data_collector" template="@Swiftmailer/Collector/swiftmailer.html.twig" id="swiftmailer" priority="245"/>
             <argument type="service" id="service_container"/>
           </service>
         </argument>
+      </call>
+      <call method="add">
+        <argument type="service" id="data_collector.dump"/>
       </call>
       <call method="add">
         <argument type="service">
@@ -1751,7 +1751,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>567bd4b887b4c2.90554964</argument>
+            <argument>5681439f20b395.43976785</argument>
           </service>
         </argument>
       </argument>
@@ -1880,7 +1880,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>567bd4b887b4c2.90554964</argument>
+            <argument>5681439f20b395.43976785</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2475,13 +2475,13 @@
           <argument>db</argument>
           <argument>@Doctrine/Collector/db.html.twig</argument>
         </argument>
-        <argument key="data_collector.dump" type="collection">
-          <argument>dump</argument>
-          <argument>@Debug/Profiler/dump.html.twig</argument>
-        </argument>
         <argument key="swiftmailer.data_collector" type="collection">
           <argument>swiftmailer</argument>
           <argument>@Swiftmailer/Collector/swiftmailer.html.twig</argument>
+        </argument>
+        <argument key="data_collector.dump" type="collection">
+          <argument>dump</argument>
+          <argument>@Debug/Profiler/dump.html.twig</argument>
         </argument>
         <argument key="data_collector.config" type="collection">
           <argument>config</argument>
@@ -2503,7 +2503,7 @@
     <service id="web_profiler.debug_toolbar" class="Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener">
       <tag name="kernel.event_subscriber"/>
       <argument type="service" id="twig"/>
-      <argument>false</argument>
+      <argument>true</argument>
       <argument>2</argument>
       <argument>bottom</argument>
       <argument type="service" id="router" on-invalid="ignore"/>

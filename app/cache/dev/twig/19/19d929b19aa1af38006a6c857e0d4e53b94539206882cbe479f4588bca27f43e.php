@@ -15,8 +15,8 @@ class __TwigTemplate_8fda41c99443642747f1cec86be493c95d6f1bb55bc991ec453ed7a01f6
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_5a7f15ce22348c5d5097913538f10a000f7b195e2c89cb03818a5db582eaa3f4 = $this->env->getExtension("native_profiler");
-        $__internal_5a7f15ce22348c5d5097913538f10a000f7b195e2c89cb03818a5db582eaa3f4->enter($__internal_5a7f15ce22348c5d5097913538f10a000f7b195e2c89cb03818a5db582eaa3f4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/toolbar.html.twig"));
+        $__internal_ffa235ec0f8ad5bdfae91554c36aa89e59db74a10cc974b8431c0f0c50051310 = $this->env->getExtension("native_profiler");
+        $__internal_ffa235ec0f8ad5bdfae91554c36aa89e59db74a10cc974b8431c0f0c50051310->enter($__internal_ffa235ec0f8ad5bdfae91554c36aa89e59db74a10cc974b8431c0f0c50051310_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/toolbar.html.twig"));
 
         // line 1
         echo "<!-- START of Symfony Web Debug Toolbar -->
@@ -68,7 +68,7 @@ class __TwigTemplate_8fda41c99443642747f1cec86be493c95d6f1bb55bc991ec453ed7a01f6
     <div id=\"sfToolbarClearer-";
             // line 24
             echo twig_escape_filter($this->env, (isset($context["token"]) ? $context["token"] : $this->getContext($context, "token")), "html", null, true);
-            echo "\" style=\"clear: both; height: 38px;\"></div>
+            echo "\" style=\"clear: both; height: 36px;\"></div>
 ";
         }
         // line 26
@@ -125,7 +125,7 @@ $context["name"], "profiler_markup_version" =>             // line 34
 <!-- END of Symfony Web Debug Toolbar -->
 ";
         
-        $__internal_5a7f15ce22348c5d5097913538f10a000f7b195e2c89cb03818a5db582eaa3f4->leave($__internal_5a7f15ce22348c5d5097913538f10a000f7b195e2c89cb03818a5db582eaa3f4_prof);
+        $__internal_ffa235ec0f8ad5bdfae91554c36aa89e59db74a10cc974b8431c0f0c50051310->leave($__internal_ffa235ec0f8ad5bdfae91554c36aa89e59db74a10cc974b8431c0f0c50051310_prof);
 
     }
 
@@ -167,7 +167,7 @@ $context["name"], "profiler_markup_version" =>             // line 34
 /*     <style>*/
 /*         {{ include('@WebProfiler/Profiler/toolbar.css.twig', { 'position': position, 'floatable': true }) }}*/
 /*     </style>*/
-/*     <div id="sfToolbarClearer-{{ token }}" style="clear: both; height: 38px;"></div>*/
+/*     <div id="sfToolbarClearer-{{ token }}" style="clear: both; height: 36px;"></div>*/
 /* {% endif %}*/
 /* */
 /* <div id="sfToolbarMainContent-{{ token }}" class="sf-toolbarreset clear-fix" data-no-turbolink>*/

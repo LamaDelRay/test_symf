@@ -1,0 +1,30 @@
+{% extends "LamaDelRayPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Ajouter une annonce - {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+
+	<h2> Modifier une annonce </h2>
+
+	{{ include("LamaDelRayPlatformBundle:Advert:form.html.twig") }}
+
+
+	<p>
+		Vous ajoutez une annonce merci de la rendre la plus complète possible.
+	</p>
+
+	<p>
+		Attention : cette annonce sera ajoutée directement
+		sur la page d'accueil après validation du formulaire.
+	</p>
+
+	<p>
+		<a href="{{ path('platform_home') }}" class="btn btn-default">
+			<i class="glyphicon glyphicon-chevron-left"></i>
+			Retour aux annonces
+		</a>
+	</p>
+
+{% endblock %}

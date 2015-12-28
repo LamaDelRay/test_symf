@@ -17,6 +17,18 @@ platform_add:
     path:	/add
     defaults:	{ _controller : LamaDelRayPlatformBundle:Advert:add }
 
+platform_edit:
+    path:	/edit/{id}
+    defaults:	{ _controller : LamaDelRayPlatformBundle:Advert:edit }
+    requirements:
+        id: \d+
+
+platform_delete:
+    path:	/delete/{id}
+    defaults:	{ _controller : LamaDelRayPlatformBundle:Advert:delete }
+    requirements:
+        id: \d+
+
 platform_view_slug:
     path:      /{year}/{slug}.{format}
     defaults:
