@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use LamaDelRay\PlatformBundle\Entity\Advert;
 
 class AdvertController extends Controller
 {
@@ -45,58 +46,81 @@ class AdvertController extends Controller
 
 	public function viewAction($id, Request $request)
 	{
-		$advert = array(
-			'title'   => 'Recherche développpeur Symfony2',
-			'id'      => $id,
-			'author'  => 'Alexandre',
-			'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
-			'date'    => new \Datetime()
-		);
+		$repository = $this->getDoctrine()
+			->getManager()
+			->getRepository('LamaDelRayPlatformBundle:Advert')
+		;
+
+		$advert = $repository->find($id);
+
+		if (null === $advert){
+			throw new NotFoundHttpException("l'annonce d'id 3" .$id. "n'existe pas.");
+		}
 
 		return $this->render(
-			'LamaDelRayPlatformBundle:Advert:view.html.twig',
-			array('advert' => $advert)
-		);
+			'LamaDelRayPlatformBundle:Advert:view.html.twig', array(
+			'advert' => $advert
+		));
 	}
 
 	public function addAction(Request $request)
 	{
-		$antispam  = $this->container->get('LamaDelRay_platform.antispam');
+		$advert = new Advert();
+		$advert->setTitle('Recherche développeur Symfony2.');
+		$advert->setAuthor('Alexandre');
+		$advert->setContent("Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla...");
 
-		$text = '...';
-		if ($antispam->isSpam($text)) {
-			throw new \Exception('Votre message a été détecté comme spam !');
-		}
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($advert);
+		$em->flush();
 
 		if ($request->isMethod('POST')){
 			$request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-			return $this->redirectToRoute('platform_view', array('id' => 5));
+			return $this->redirect($this->generateUrl('platform_view', array('id' => $advert->getId())));
 		}
+
 		return $this->render('LamaDelRayPlatformBundle:Advert:add.html.twig');
 	}
 
 	public function editAction($id, Request $request)
 	{
-		if ($request->isMethod('POST')){
-			$request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
-			return $this->redirectToRoute('platform_view', array('id' => 5));
+		$em = $this->getDoctrine()->getManager();
+
+		$advert = $em->getRepository('LamaDelRayPlatformBundle:Advert')->find($id);
+
+		if (null === $advert){
+			throw new NotFoundHttpException("l'annonce d'id ".$id." n'existe pas.");
 		}
 
-	    $advert = array(
-			'title'   => 'Recherche développpeur Symfony2',
-		    'id'      => $id,
-		    'author'  => 'Alexandre',
-		    'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
-		    'date'    => new \Datetime()
-	    );
+		$listCategories = $em->getRepository('LamaDelRayPlatformBundle:Category')->findAll();
+
+		foreach ($list as $category) {
+			$advert->addCategory($category);
+		}
+
+		$em->flush();
 
 		return $this->render('LamaDelRayPlatformBundle:Advert:edit.html.twig', array(
-      		'advert' => $advert
-    	));
+			'advert' => $advert
+		));
 	}
 
 	public function deleteAction($id)
 	{
+		$em = $this->getDoctrine()->getManager();
+
+		$advert = $em->getRepository('LamaDelRayPlatformBundle:Advert')->find($id);
+
+		if (null === $advert){
+			throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
+		}
+
+		foreach ($advert->getCategories() as $category){
+			$advert->removeCategory($category);
+		}
+
+		$em->flush();
+
 		return $this->render('LamaDelRayPlatformBundle:Advert:delete.html.twig');
 	}
 
