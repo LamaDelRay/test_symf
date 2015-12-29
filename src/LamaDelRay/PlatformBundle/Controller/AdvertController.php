@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use LamaDelRay\PlatformBundle\Entity\Advert;
+use LamaDelRay\PlatformBundle\Entity\Application;
+use LamaDelRay\PlatformBundle\Entity\AdvertSkill;
 
 class AdvertController extends Controller
 {
@@ -46,29 +48,41 @@ class AdvertController extends Controller
 
 	public function viewAction($id, Request $request)
 	{
-		$repository = $this->getDoctrine()
-			->getManager()
-			->getRepository('LamaDelRayPlatformBundle:Advert')
-		;
-
-		$advert = $repository->find($id);
+		$em = $this->getDoctrine()->getManager();
+		$advert = $em->getRepository('LamaDelRayPlatformBundle:Advert')->find($id);
 
 		if (null === $advert){
-			throw new NotFoundHttpException("l'annonce d'id 3" .$id. "n'existe pas.");
+			throw new NotFoundHttpException("L'annonce d'id".$id." n'existe pas.");
 		}
 
-		return $this->render(
-			'LamaDelRayPlatformBundle:Advert:view.html.twig', array(
-			'advert' => $advert
+		$listApplications = $em->getRepository('LamaDelRayPlatformBundle:Application')->findBy(array('advert' => $advert));
+		$listAdvertSkills = $em->getRepository('LamaDelRayPlatformBundle:AdvertSkill')->findBy(array('advert' => $advert));
+
+		return $this->render('LamaDelRayPlatformBundle:Advert:view.html.twig', array(
+			'advert' 			=> $advert,
+			'listApplications'	=> $listApplications,
+			'listAdvertSkills'	=> $listAdvertSkills
 		));
 	}
 
 	public function addAction(Request $request)
 	{
+		$em = $this->getDoctrine()->getManager();
+
 		$advert = new Advert();
 		$advert->setTitle('Recherche développeur Symfony2.');
 		$advert->setAuthor('Alexandre');
 		$advert->setContent("Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla...");
+
+		$listSkills = $em->getRepository('LamaDelRayPlatformBundle:Skill')->findAll();
+
+		foreach ($listSkills as $skill) {
+			$advertSkill = new AdvertSkill();
+			$advertSkill->setAdvert($advert);
+			$advertSkill->setSkill($skill);
+			$advertSkill->setLevel('Expert');
+			$em->persist($advertSkill);
+		}
 
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($advert);

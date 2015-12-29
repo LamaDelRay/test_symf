@@ -14,6 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Advert
 {
     /**
+    *   @ORM\OneToMany(targetEntity="OC\PlatformBundle\Entity\Application", mappedBy="advert")
+    */
+    private $applications;
+
+    /**
     * @ORM\OneToOne(targetEntity="LamaDelRay\PlatformBundle\Entity\Image", cascade={"persist"})
     */
     private $image;
