@@ -22,20 +22,20 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_f0799e507b994e36513ee8afcbd80a99496e04440a9615c23b6a9c231dabbbe8 = $this->env->getExtension("native_profiler");
-        $__internal_f0799e507b994e36513ee8afcbd80a99496e04440a9615c23b6a9c231dabbbe8->enter($__internal_f0799e507b994e36513ee8afcbd80a99496e04440a9615c23b6a9c231dabbbe8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:view.html.twig"));
+        $__internal_ef2b9f8f3608a9b3f68008c3b6bb336d9d0bf05cace8cb43d367a06d12cc4949 = $this->env->getExtension("native_profiler");
+        $__internal_ef2b9f8f3608a9b3f68008c3b6bb336d9d0bf05cace8cb43d367a06d12cc4949->enter($__internal_ef2b9f8f3608a9b3f68008c3b6bb336d9d0bf05cace8cb43d367a06d12cc4949_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:view.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_f0799e507b994e36513ee8afcbd80a99496e04440a9615c23b6a9c231dabbbe8->leave($__internal_f0799e507b994e36513ee8afcbd80a99496e04440a9615c23b6a9c231dabbbe8_prof);
+        $__internal_ef2b9f8f3608a9b3f68008c3b6bb336d9d0bf05cace8cb43d367a06d12cc4949->leave($__internal_ef2b9f8f3608a9b3f68008c3b6bb336d9d0bf05cace8cb43d367a06d12cc4949_prof);
 
     }
 
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        $__internal_1a26b002bedf28329d9f37ff1c68db385f4bee203c1b5f971d8dcc1d3fb7c193 = $this->env->getExtension("native_profiler");
-        $__internal_1a26b002bedf28329d9f37ff1c68db385f4bee203c1b5f971d8dcc1d3fb7c193->enter($__internal_1a26b002bedf28329d9f37ff1c68db385f4bee203c1b5f971d8dcc1d3fb7c193_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_7db6c2d791bca84aa21b827727c92b1eb498b61b0cfc9377b40c0a084c830732 = $this->env->getExtension("native_profiler");
+        $__internal_7db6c2d791bca84aa21b827727c92b1eb498b61b0cfc9377b40c0a084c830732->enter($__internal_7db6c2d791bca84aa21b827727c92b1eb498b61b0cfc9377b40c0a084c830732_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         // line 4
         echo "\tLecture d'une annonce - ";
@@ -43,15 +43,15 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
         echo "
 ";
         
-        $__internal_1a26b002bedf28329d9f37ff1c68db385f4bee203c1b5f971d8dcc1d3fb7c193->leave($__internal_1a26b002bedf28329d9f37ff1c68db385f4bee203c1b5f971d8dcc1d3fb7c193_prof);
+        $__internal_7db6c2d791bca84aa21b827727c92b1eb498b61b0cfc9377b40c0a084c830732->leave($__internal_7db6c2d791bca84aa21b827727c92b1eb498b61b0cfc9377b40c0a084c830732_prof);
 
     }
 
     // line 7
     public function block_platform_body($context, array $blocks = array())
     {
-        $__internal_a9adf69cdb7dac2f4a2eff546b6ff4c9a1957556b778354167947e2934197353 = $this->env->getExtension("native_profiler");
-        $__internal_a9adf69cdb7dac2f4a2eff546b6ff4c9a1957556b778354167947e2934197353->enter($__internal_a9adf69cdb7dac2f4a2eff546b6ff4c9a1957556b778354167947e2934197353_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "platform_body"));
+        $__internal_1b864d854f98dd8e4b75614858427a231681fec03b8ed87780474e72a0ea3012 = $this->env->getExtension("native_profiler");
+        $__internal_1b864d854f98dd8e4b75614858427a231681fec03b8ed87780474e72a0ea3012->enter($__internal_1b864d854f98dd8e4b75614858427a231681fec03b8ed87780474e72a0ea3012_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "platform_body"));
 
         // line 8
         echo "
@@ -123,23 +123,53 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
         }
         // line 24
         echo "
+\t";
+        // line 25
+        if ((twig_length_filter($this->env, (isset($context["listAdvertSkills"]) ? $context["listAdvertSkills"] : $this->getContext($context, "listAdvertSkills"))) > 0)) {
+            // line 26
+            echo "\t\t<div>
+\t\t\tCette annonce requiert les compétences suivantes :
+\t\t\t<ul>
+\t\t\t\t";
+            // line 29
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable((isset($context["listAdvertSkills"]) ? $context["listAdvertSkills"] : $this->getContext($context, "listAdvertSkills")));
+            foreach ($context['_seq'] as $context["_key"] => $context["advertSkill"]) {
+                // line 30
+                echo "\t\t\t\t<li>";
+                echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["advertSkill"], "skill", array()), "name", array()), "html", null, true);
+                echo " : niveau ";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["advertSkill"], "level", array()), "html", null, true);
+                echo "</li>
+\t\t\t\t";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['advertSkill'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 32
+            echo "\t\t\t</ul>
+\t\t</div>
+\t";
+        }
+        // line 35
+        echo "
 \t<p>
 \t\t<a href=\"";
-        // line 26
+        // line 37
         echo $this->env->getExtension('routing')->getPath("platform_home");
         echo "\" class=\"btn btn-default\">
 \t\t\t<i class=\"glyphicon glyphicon-chevron-left\"></i>
 \t\t\tRetour à la liste
 \t\t</a>
 \t\t<a href=\"";
-        // line 30
+        // line 41
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("platform_edit", array("id" => $this->getAttribute((isset($context["advert"]) ? $context["advert"] : $this->getContext($context, "advert")), "id", array()))), "html", null, true);
         echo "\" class=\"btn btn-default\">
 \t\t\t<i class=\"glyphicon glyphicon-edit\"></i>
 \t\t\tModifier l'annonce
 \t\t</a>
 \t\t<a href=\"";
-        // line 34
+        // line 45
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("platform_delete", array("id" => $this->getAttribute((isset($context["advert"]) ? $context["advert"] : $this->getContext($context, "advert")), "id", array()))), "html", null, true);
         echo "\" class=\"btn btn-danger\">
 \t\t\t<i class=\"glyphicon glyphicon-trash\"></i>
@@ -149,7 +179,7 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
 
 ";
         
-        $__internal_a9adf69cdb7dac2f4a2eff546b6ff4c9a1957556b778354167947e2934197353->leave($__internal_a9adf69cdb7dac2f4a2eff546b6ff4c9a1957556b778354167947e2934197353_prof);
+        $__internal_1b864d854f98dd8e4b75614858427a231681fec03b8ed87780474e72a0ea3012->leave($__internal_1b864d854f98dd8e4b75614858427a231681fec03b8ed87780474e72a0ea3012_prof);
 
     }
 
@@ -165,7 +195,7 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
 
     public function getDebugInfo()
     {
-        return array (  143 => 34,  136 => 30,  129 => 26,  125 => 24,  121 => 22,  107 => 21,  101 => 20,  84 => 19,  80 => 17,  78 => 16,  72 => 13,  64 => 10,  60 => 9,  57 => 8,  51 => 7,  41 => 4,  35 => 3,  11 => 1,);
+        return array (  173 => 45,  166 => 41,  159 => 37,  155 => 35,  150 => 32,  139 => 30,  135 => 29,  130 => 26,  128 => 25,  125 => 24,  121 => 22,  107 => 21,  101 => 20,  84 => 19,  80 => 17,  78 => 16,  72 => 13,  64 => 10,  60 => 9,  57 => 8,  51 => 7,  41 => 4,  35 => 3,  11 => 1,);
     }
 }
 /* {% extends "LamaDelRayPlatformBundle::layout.html.twig" %}*/
@@ -190,6 +220,17 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
 /* 			{{ category.name }}{% if not loop.last %}, {% endif %}*/
 /* 			{% endfor %}*/
 /* 		</p>*/
+/* 	{% endif %}*/
+/* */
+/* 	{% if listAdvertSkills|length > 0 %}*/
+/* 		<div>*/
+/* 			Cette annonce requiert les compétences suivantes :*/
+/* 			<ul>*/
+/* 				{% for advertSkill in listAdvertSkills %}*/
+/* 				<li>{{ advertSkill.skill.name }} : niveau {{ advertSkill.level }}</li>*/
+/* 				{% endfor %}*/
+/* 			</ul>*/
+/* 		</div>*/
 /* 	{% endif %}*/
 /* */
 /* 	<p>*/

@@ -22,20 +22,20 @@ class __TwigTemplate_7172a500ccf3bd8443a39c8d77dd2be43ae035dd62475fe18004b9c6287
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_da4669adf59bf8c3541566bcdccf174588c45a0c9b143844f3511a39ad387721 = $this->env->getExtension("native_profiler");
-        $__internal_da4669adf59bf8c3541566bcdccf174588c45a0c9b143844f3511a39ad387721->enter($__internal_da4669adf59bf8c3541566bcdccf174588c45a0c9b143844f3511a39ad387721_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:index.html.twig"));
+        $__internal_8a57d145833863f20432e8507b124fc0a9608b59701a364030d898f3b310f333 = $this->env->getExtension("native_profiler");
+        $__internal_8a57d145833863f20432e8507b124fc0a9608b59701a364030d898f3b310f333->enter($__internal_8a57d145833863f20432e8507b124fc0a9608b59701a364030d898f3b310f333_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:index.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_da4669adf59bf8c3541566bcdccf174588c45a0c9b143844f3511a39ad387721->leave($__internal_da4669adf59bf8c3541566bcdccf174588c45a0c9b143844f3511a39ad387721_prof);
+        $__internal_8a57d145833863f20432e8507b124fc0a9608b59701a364030d898f3b310f333->leave($__internal_8a57d145833863f20432e8507b124fc0a9608b59701a364030d898f3b310f333_prof);
 
     }
 
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        $__internal_055b40c29a22d4b498bd0963aedecc4a4457a1368b6f4cc3212d361c3702a129 = $this->env->getExtension("native_profiler");
-        $__internal_055b40c29a22d4b498bd0963aedecc4a4457a1368b6f4cc3212d361c3702a129->enter($__internal_055b40c29a22d4b498bd0963aedecc4a4457a1368b6f4cc3212d361c3702a129_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_16f2595343506ad6b16a51c2747e96392bbb2b3cfd077130b1df189953fb0c45 = $this->env->getExtension("native_profiler");
+        $__internal_16f2595343506ad6b16a51c2747e96392bbb2b3cfd077130b1df189953fb0c45->enter($__internal_16f2595343506ad6b16a51c2747e96392bbb2b3cfd077130b1df189953fb0c45_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         echo " 
     Accueil - ";
@@ -44,15 +44,15 @@ class __TwigTemplate_7172a500ccf3bd8443a39c8d77dd2be43ae035dd62475fe18004b9c6287
         echo "
 ";
         
-        $__internal_055b40c29a22d4b498bd0963aedecc4a4457a1368b6f4cc3212d361c3702a129->leave($__internal_055b40c29a22d4b498bd0963aedecc4a4457a1368b6f4cc3212d361c3702a129_prof);
+        $__internal_16f2595343506ad6b16a51c2747e96392bbb2b3cfd077130b1df189953fb0c45->leave($__internal_16f2595343506ad6b16a51c2747e96392bbb2b3cfd077130b1df189953fb0c45_prof);
 
     }
 
     // line 7
     public function block_platform_body($context, array $blocks = array())
     {
-        $__internal_b77531eec626a4d04d1d8713623025e66a72007d67501619af946af3a188383c = $this->env->getExtension("native_profiler");
-        $__internal_b77531eec626a4d04d1d8713623025e66a72007d67501619af946af3a188383c->enter($__internal_b77531eec626a4d04d1d8713623025e66a72007d67501619af946af3a188383c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "platform_body"));
+        $__internal_9941a2be7d989c5194f0abf5f6eab7b5f8ea6b8fbf42898c842b8c29b371b2a0 = $this->env->getExtension("native_profiler");
+        $__internal_9941a2be7d989c5194f0abf5f6eab7b5f8ea6b8fbf42898c842b8c29b371b2a0->enter($__internal_9941a2be7d989c5194f0abf5f6eab7b5f8ea6b8fbf42898c842b8c29b371b2a0_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "platform_body"));
 
         // line 8
         echo "    <h2>Liste des annonces</h2>
@@ -96,9 +96,37 @@ class __TwigTemplate_7172a500ccf3bd8443a39c8d77dd2be43ae035dd62475fe18004b9c6287
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 21
         echo "    </ul>
+
+    <ul class=\"pagination\">
+        ";
+        // line 24
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(range(1, (isset($context["nbPages"]) ? $context["nbPages"] : $this->getContext($context, "nbPages"))));
+        foreach ($context['_seq'] as $context["_key"] => $context["p"]) {
+            // line 25
+            echo "        <li ";
+            if (($context["p"] == (isset($context["page"]) ? $context["page"] : $this->getContext($context, "page")))) {
+                echo " class=\"active\" ";
+            }
+            echo ">
+            <a href=\"";
+            // line 26
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("platform_home", array("page" => $context["p"])), "html", null, true);
+            echo "\"> ";
+            echo twig_escape_filter($this->env, $context["p"], "html", null, true);
+            echo " </a>
+        </li>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['p'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 29
+        echo "    </ul>
+
 ";
         
-        $__internal_b77531eec626a4d04d1d8713623025e66a72007d67501619af946af3a188383c->leave($__internal_b77531eec626a4d04d1d8713623025e66a72007d67501619af946af3a188383c_prof);
+        $__internal_9941a2be7d989c5194f0abf5f6eab7b5f8ea6b8fbf42898c842b8c29b371b2a0->leave($__internal_9941a2be7d989c5194f0abf5f6eab7b5f8ea6b8fbf42898c842b8c29b371b2a0_prof);
 
     }
 
@@ -114,7 +142,7 @@ class __TwigTemplate_7172a500ccf3bd8443a39c8d77dd2be43ae035dd62475fe18004b9c6287
 
     public function getDebugInfo()
     {
-        return array (  98 => 21,  91 => 19,  83 => 16,  79 => 15,  74 => 13,  70 => 12,  67 => 11,  62 => 10,  58 => 8,  52 => 7,  43 => 4,  35 => 3,  11 => 1,);
+        return array (  125 => 29,  114 => 26,  107 => 25,  103 => 24,  98 => 21,  91 => 19,  83 => 16,  79 => 15,  74 => 13,  70 => 12,  67 => 11,  62 => 10,  58 => 8,  52 => 7,  43 => 4,  35 => 3,  11 => 1,);
     }
 }
 /* {% extends "LamaDelRayPlatformBundle::layout.html.twig" %}*/
@@ -138,4 +166,13 @@ class __TwigTemplate_7172a500ccf3bd8443a39c8d77dd2be43ae035dd62475fe18004b9c6287
 /*             <li>Pas (encore !) d'annonces</li>*/
 /*         {% endfor %}*/
 /*     </ul>*/
+/* */
+/*     <ul class="pagination">*/
+/*         {% for p in range(1, nbPages) %}*/
+/*         <li {% if p == page %} class="active" {% endif %}>*/
+/*             <a href="{{ path('platform_home', {'page': p}) }}"> {{ p }} </a>*/
+/*         </li>*/
+/*         {% endfor %}*/
+/*     </ul>*/
+/* */
 /* {% endblock %}*/

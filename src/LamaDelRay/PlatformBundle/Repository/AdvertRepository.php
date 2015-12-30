@@ -2,6 +2,10 @@
 
 namespace LamaDelRay\PlatformBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\queryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * AdvertRepository
  *
@@ -10,4 +14,13 @@ namespace LamaDelRay\PlatformBundle\Repository;
  */
 class AdvertRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getAdverts($page, $nbPerPage)
+	{
+		$query = $this->createQueryBuilder('a')
+		->leftJoin('a.image', 'i')->addSelect('i')
+		->leftJoin('a.categories', 'c')->addSelect('c')
+		->orderBy('a.date', 'DESC')->getQuery();
+		$query->setFirstResult(($page-1) * $nbPerPage)->setMaxResults($nbPerPage);
+		return new Paginator($query, true);
+	}
 }

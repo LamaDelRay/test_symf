@@ -9,9 +9,26 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="application")
  * @ORM\Entity(repositoryClass="LamaDelRay\PlatformBundle\Repository\ApplicationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Application
 {
+
+    /**
+     *  @ORM\PrePersist
+     */
+    public function increase()
+    {
+        $this->getAdvert()->increaseApplication();
+    }
+
+    /**
+     *  @ORM\PreRemove
+     */
+    public function decrease()
+    {
+        $this->getAdvert()->decreaseApplication();
+    }
 
     /**
     * @ORM\ManyToOne(targetEntity="LamaDelRay\PlatformBundle\Entity\Advert", inversedBy="applications")
@@ -51,27 +68,7 @@ class Application
 
     public function __construct()
     {
-        $this->applications = new ArrayCollection();
-        // ...
-    }
-
-    public function addApplication(Application $application)
-    {
-        $this->applications[] = $application;
-
-        $application->setAdvert($this);
-
-        return $this;
-    }
-
-    public function removeApplication(Application $application)
-    {
-        $this->applications->removeElement($application);
-    }
-
-    public function getApplications()
-    {
-        return $this->applications;
+        $this->date = new \Datetime();
     }
 
     /**

@@ -4,6 +4,12 @@ services:
 #        arguments: [@service_id, "plain_value", %parameter%]
 
 services:
+    LamaDelRay_platform.doctrine.notificqtion:
+        class: LamaDelRay\PlatformBundle\DoctrineListener\ApplicationNotification
+        arguments: [@mailer]
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+
     LamaDelRay_platform.antispam:
         class: LamaDelRay\PlatformBundle\Antispam\LamaDelRayAntispam
         arguments: [@mailer, %locale%, 50]

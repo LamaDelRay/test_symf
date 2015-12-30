@@ -20,29 +20,19 @@ class AdvertController extends Controller
 			throw new NotFoundHttpException('Page "'.$page.'" inexistante');
 		}
 
-		$listAdverts = array(
-			array(
-				'title'   => 'Recherche développpeur Symfony2',
-		        'id'      => 1,
-		        'author'  => 'Alexandre',
-		        'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
-		        'date'    => new \Datetime()),
-			array(
-					'title'   => 'Mission de webmaster',
-					'id'      => 2,
-			        'author'  => 'Hugo',
-			        'content' => 'Nous recherchons un webmaster capable de maintenir notre site internet. Blabla…',
-			        'date'    => new \Datetime()),
-			array(
-				'title'   => 'Offre de stage webdesigner',
-		        'id'      => 3,
-		        'author'  => 'Mathieu',
-		        'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
-		        'date'    => new \Datetime())
-		);
+		$nbPerPage = 3;
+
+		$listAdverts = $this->getDoctrine()->getManager()->getRepository('LamaDelRayPlatformBundle:Advert')->getAdverts($page, $nbPerPage);
+
+		$nbPages = ceil(count($listAdverts)/$nbPerPage);
+		if ($page > $nbPages) {
+			throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+		}
 
 		return $this->render('LamaDelRayPlatformBundle:Advert:index.html.twig', array(
-			'listAdverts' => $listAdverts
+			'listAdverts' => $listAdverts,
+			'nbPages'	  => $nbPages,
+			'page'		  => $page
 		));
 	}
 
@@ -51,49 +41,40 @@ class AdvertController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$advert = $em->getRepository('LamaDelRayPlatformBundle:Advert')->find($id);
 
-		if (null === $advert){
+		if ($advert === null){
 			throw new NotFoundHttpException("L'annonce d'id".$id." n'existe pas.");
 		}
 
-		$listApplications = $em->getRepository('LamaDelRayPlatformBundle:Application')->findBy(array('advert' => $advert));
+		// $listApplications = $em->getRepository('LamaDelRayPlatformBundle:Application')->findBy(array('advert' => $advert));
 		$listAdvertSkills = $em->getRepository('LamaDelRayPlatformBundle:AdvertSkill')->findBy(array('advert' => $advert));
 
 		return $this->render('LamaDelRayPlatformBundle:Advert:view.html.twig', array(
 			'advert' 			=> $advert,
-			'listApplications'	=> $listApplications,
 			'listAdvertSkills'	=> $listAdvertSkills
 		));
 	}
 
 	public function addAction(Request $request)
 	{
-		$em = $this->getDoctrine()->getManager();
-
 		$advert = new Advert();
-		$advert->setTitle('Recherche développeur Symfony2.');
-		$advert->setAuthor('Alexandre');
-		$advert->setContent("Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla...");
+		$advert->setDate(new \Datetime());
+		$form = $this->get('form.factory')->createBuilder('form', $advert)
+		->add('date', 'date')->add('title', 'text')
+		->add('content', 'textarea')->add('author','text')
+		->add('published', 'checkbox', array('required' => false))->add('save', 'submit')->getForm();
 
-		$listSkills = $em->getRepository('LamaDelRayPlatformBundle:Skill')->findAll();
-
-		foreach ($listSkills as $skill) {
-			$advertSkill = new AdvertSkill();
-			$advertSkill->setAdvert($advert);
-			$advertSkill->setSkill($skill);
-			$advertSkill->setLevel('Expert');
-			$em->persist($advertSkill);
-		}
-
-		$em = $this->getDoctrine()->getManager();
-		$em->persist($advert);
-		$em->flush();
-
-		if ($request->isMethod('POST')){
+		$form->handleRequest($request);
+		if ($form->isValid()){
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($advert);
+			$em->flush();
 			$request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 			return $this->redirect($this->generateUrl('platform_view', array('id' => $advert->getId())));
 		}
 
-		return $this->render('LamaDelRayPlatformBundle:Advert:add.html.twig');
+		return $this->render('LamaDelRayPlatformBundle:Advert:add.html.twig', array(
+			'form' => $form->createView(),
+		));
 	}
 
 	public function editAction($id, Request $request)
@@ -102,17 +83,9 @@ class AdvertController extends Controller
 
 		$advert = $em->getRepository('LamaDelRayPlatformBundle:Advert')->find($id);
 
-		if (null === $advert){
+		if ($advert === null){
 			throw new NotFoundHttpException("l'annonce d'id ".$id." n'existe pas.");
 		}
-
-		$listCategories = $em->getRepository('LamaDelRayPlatformBundle:Category')->findAll();
-
-		foreach ($list as $category) {
-			$advert->addCategory($category);
-		}
-
-		$em->flush();
 
 		return $this->render('LamaDelRayPlatformBundle:Advert:edit.html.twig', array(
 			'advert' => $advert
@@ -125,25 +98,28 @@ class AdvertController extends Controller
 
 		$advert = $em->getRepository('LamaDelRayPlatformBundle:Advert')->find($id);
 
-		if (null === $advert){
+		if ( $advert === null){
 			throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
 		}
 
-		foreach ($advert->getCategories() as $category){
-			$advert->removeCategory($category);
+		if ($request->isMethod('POST')){
+			$request->getSession()->getFlashBag()->add('info', 'Annonce bien supprimée.');
+			return $this->redirect($this->generateUrl('platform_home'));
 		}
 
-		$em->flush();
-
-		return $this->render('LamaDelRayPlatformBundle:Advert:delete.html.twig');
+		return $this->render('LamaDelRayPlatformBundle:Advert:delete.html.twig', array(
+			'advert' => $advert
+		));
 	}
 
-	public function menuAction()
+	public function menuAction($limit = 3)
 	{
-		$listAdverts = array(
-			array('id' => 2, 'title' => 'Recherche développeur Symfony2'),
-			array('id' => 5, 'title' => 'Mission de webmaster'),
-			array('id' => 9, 'title' => 'Offre de stage webdesigner')
+		$listAdverts = $this->getDoctrine()->getManager()->getRepository('LamaDelRayPlatformBundle:Advert')
+		->findBy(
+			array(),
+			array('date' => 'desc'),
+			$limit,
+			0
 		);
 
 		return $this->render('LamaDelRayPlatformBundle:Advert:menu.html.twig', array(

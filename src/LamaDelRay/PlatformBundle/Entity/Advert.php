@@ -4,19 +4,28 @@ namespace LamaDelRay\PlatformBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * Advert
  *
  * @ORM\Table(name="advert")
  * @ORM\Entity(repositoryClass="LamaDelRay\PlatformBundle\Repository\AdvertRepository")
+ * @ORM\HasLifeCycleCallbacks()
  */
 class Advert
 {
     /**
-    *   @ORM\OneToMany(targetEntity="OC\PlatformBundle\Entity\Application", mappedBy="advert")
+    *   @ORM\OneToMany(targetEntity="LamaDelRay\PlatformBundle\Entity\Application", mappedBy="advert")
     */
     private $applications;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
 
     /**
     * @ORM\OneToOne(targetEntity="LamaDelRay\PlatformBundle\Entity\Image", cascade={"persist"})
@@ -28,6 +37,10 @@ class Advert
     */
     private $categories;
 
+    /**
+    * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+    */
+    private $updatedAt;
 
     /**
      * @var int
@@ -37,6 +50,23 @@ class Advert
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var int
+     *  @ORM\Column(name="nb_applications", type="integer")
+     */
+    private $nbApplications = 0;
+
+    public function increaseApplication()
+    {
+        $this->nbApplications++;
+    }
+
+    public function decreaseApplication()
+    {
+        $this->nbApplications--;
+    }
+
 
     /**
      * @var \DateTime
@@ -227,8 +257,9 @@ class Advert
 
     public function __construct()
     {
-        $this->date = new \Datetime();
-        $this->categories = new ArrayCollection();
+        $this->date         = new \Datetime();
+        $this->categories   = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     public function addCategory(Category $category)
@@ -247,4 +278,119 @@ class Advert
         return $this->categories;
     }
 
+    /**
+    *   @ORM\PreUpdate
+    */
+
+    public function updateDate()
+    {
+        $this->setUpdatedAt(new \Datetime());
+    }
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Advert
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Advert
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set nbApplications
+     *
+     * @param integer $nbApplications
+     *
+     * @return Advert
+     */
+    public function setNbApplications($nbApplications)
+    {
+        $this->nbApplications = $nbApplications;
+
+        return $this;
+    }
+
+    /**
+     * Get nbApplications
+     *
+     * @return integer
+     */
+    public function getNbApplications()
+    {
+        return $this->nbApplications;
+    }
+
+    /**
+     * Add application
+     *
+     * @param \LamaDelRay\PlatformBundle\Entity\Application $application
+     *
+     * @return Advert
+     */
+    public function addApplication(\LamaDelRay\PlatformBundle\Entity\Application $application)
+    {
+        $this->applications[] = $application;
+        $application->setAdvert($this);
+        return $this;
+    }
+
+    /**
+     * Remove application
+     *
+     * @param \LamaDelRay\PlatformBundle\Entity\Application $application
+     */
+    public function removeApplication(\LamaDelRay\PlatformBundle\Entity\Application $application)
+    {
+        $this->applications->removeElement($application);
+    }
+
+    /**
+     * Get applications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
+    }
 }

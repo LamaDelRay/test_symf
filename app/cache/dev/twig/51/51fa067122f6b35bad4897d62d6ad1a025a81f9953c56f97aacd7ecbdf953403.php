@@ -15,8 +15,8 @@ class __TwigTemplate_320e62de899edaa6d350fd7a48aeea2face30b36feb4ff31987f9e88af2
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_cc674973c25c352cd36294ce383fbfbba2ffeb554e51d89750a2f9236c672905 = $this->env->getExtension("native_profiler");
-        $__internal_cc674973c25c352cd36294ce383fbfbba2ffeb554e51d89750a2f9236c672905->enter($__internal_cc674973c25c352cd36294ce383fbfbba2ffeb554e51d89750a2f9236c672905_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:menu.html.twig"));
+        $__internal_58896671f6c71102de11148de7c60bdc1e62872cf6a72a026ae809f67990342e = $this->env->getExtension("native_profiler");
+        $__internal_58896671f6c71102de11148de7c60bdc1e62872cf6a72a026ae809f67990342e->enter($__internal_58896671f6c71102de11148de7c60bdc1e62872cf6a72a026ae809f67990342e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:menu.html.twig"));
 
         // line 1
         echo "<ul class=\"nav nav-pills nav-stacked\">
@@ -45,7 +45,7 @@ class __TwigTemplate_320e62de899edaa6d350fd7a48aeea2face30b36feb4ff31987f9e88af2
         // line 9
         echo "</ul>";
         
-        $__internal_cc674973c25c352cd36294ce383fbfbba2ffeb554e51d89750a2f9236c672905->leave($__internal_cc674973c25c352cd36294ce383fbfbba2ffeb554e51d89750a2f9236c672905_prof);
+        $__internal_58896671f6c71102de11148de7c60bdc1e62872cf6a72a026ae809f67990342e->leave($__internal_58896671f6c71102de11148de7c60bdc1e62872cf6a72a026ae809f67990342e_prof);
 
     }
 
