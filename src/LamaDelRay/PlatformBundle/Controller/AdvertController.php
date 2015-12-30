@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use LamaDelRay\PlatformBundle\Entity\Advert;
+use LamaDelRay\PlatformBundle\Form\AdvertType;
 use LamaDelRay\PlatformBundle\Entity\Application;
 use LamaDelRay\PlatformBundle\Entity\AdvertSkill;
 
@@ -58,10 +59,7 @@ class AdvertController extends Controller
 	{
 		$advert = new Advert();
 		$advert->setDate(new \Datetime());
-		$form = $this->get('form.factory')->createBuilder('form', $advert)
-		->add('date', 'date')->add('title', 'text')
-		->add('content', 'textarea')->add('author','text')
-		->add('published', 'checkbox', array('required' => false))->add('save', 'submit')->getForm();
+		$form = $this->createForm(new AdvertType(),$advert);
 
 		$form->handleRequest($request);
 		if ($form->isValid()){
@@ -86,6 +84,8 @@ class AdvertController extends Controller
 		if ($advert === null){
 			throw new NotFoundHttpException("l'annonce d'id ".$id." n'existe pas.");
 		}
+
+		$formBuilder = $this->get('form.factory')->createBuilder('form', $advert);
 
 		return $this->render('LamaDelRayPlatformBundle:Advert:edit.html.twig', array(
 			'advert' => $advert
