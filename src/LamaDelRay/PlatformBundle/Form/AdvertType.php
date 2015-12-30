@@ -19,8 +19,12 @@ class AdvertType extends AbstractType
         ->add('date', 'date')->add('title', 'text')
         ->add('content', 'textarea')->add('author','text')
         ->add('published', 'checkbox', array('required' => false))->add('image', new ImageType())
-        ->add('save', 'submit')
-        ;
+        ->add('categories', 'collection', array(
+            'type'      => new CategoryType(),
+            'allow_add' =>  true,
+            'allow_delete' => true
+        ))
+        ->add('save',   'submit');
     }
     
     /**
