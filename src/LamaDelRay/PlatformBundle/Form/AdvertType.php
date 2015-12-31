@@ -4,8 +4,11 @@ namespace LamaDelRay\PlatformBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 
 class AdvertType extends AbstractType
 {
@@ -18,13 +21,30 @@ class AdvertType extends AbstractType
         $builder
         ->add('date', 'date')->add('title', 'text')
         ->add('content', 'textarea')->add('author','text')
-        ->add('published', 'checkbox', array('required' => false))->add('image', new ImageType())
-        ->add('categories', 'collection', array(
-            'type'      => new CategoryType(),
-            'allow_add' =>  true,
-            'allow_delete' => true
+        ->add('image', new ImageType())
+        ->add('categories', 'entity', array(
+            'class'      => 'LamaDelRayPlatformBundle:Category',
+            'property' =>  'name',
+            'multiple' => true
         ))
         ->add('save',   'submit');
+
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event){
+                $advert = $event->getData();
+                if ($advert === null){
+                    return;
+                }
+
+                if (!$advert->getPublished() || null === $advert->getId()){
+                    $event->getForm()->add('published', 'checkbox', array('required' => false));
+                }
+                else {
+                    $event->getForm()->remove('published');
+                }
+            }
+        );
     }
     
     /**
@@ -37,11 +57,10 @@ class AdvertType extends AbstractType
         ));
     }
 
-
-
-
     public function getName()
     {
         return 'platformbundle_advert';
     }
+
+
 }

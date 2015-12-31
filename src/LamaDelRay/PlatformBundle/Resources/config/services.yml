@@ -14,3 +14,9 @@ services:
         class: LamaDelRay\PlatformBundle\Antispam\LamaDelRayAntispam
         arguments: [@mailer, %locale%, 50]
 
+    platform.validator.antiflood:
+        class: LamaDelRay\PlatformBundle\Validator\AntifloodValidator
+        arguments: [@request_stack, @doctrine.orm.entity_manager]
+        tags:
+            - { name: validator.constraint_validator, alias: platform_antiflood}
+

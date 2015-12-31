@@ -3,6 +3,7 @@
 namespace LamaDelRay\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Image
@@ -35,6 +36,10 @@ class Image
      */
     private $alt;
 
+
+    private $file;
+
+    private $tempFilename;
 
     /**
      * Get id
@@ -92,6 +97,95 @@ class Image
     public function getAlt()
     {
         return $this->alt;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile(UploadedFile $file)
+    {
+        $this->file = $file;
+
+        if (null !== $this->url){
+            $this->tempFilename = $this->url;
+            $this->url = null;
+            $this->alt = null;
+        }
+    }
+
+    public function preUpload()
+    {
+        if (null === $this->file){
+            return;
+        }
+        $this->url = $this->file->guessExtension();
+        $this->url = $this->file->guessClientOriginalName();
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+
+    public function upload()
+    {
+        if (null === $this->file){
+            return;
+        }
+
+        if(null !== $this->tempFilename){
+            $oldFile = $this->getUploadRootDir().'/'.$this->id.'.'.$this->tempFilename;
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+
+        $this->file->move(
+            $this->getUploadRootDir(),
+            $this->id.'.'.$this->url
+        );
+
+        // $name = $this->file->getClientOriginalName();
+        // $this->file->move($this->getUploadRootDir(), $name);
+        // $this->url = $name;
+        // $this->alt = $name;
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+
+    public function preRemoveUpload()
+    {
+        $this->tempFilename = $this->getUploadRootDir().'/'.$this->id.'.'.$this->url;
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+
+    public function removeUpload()
+    {
+        if (file_exists($this->tempFilename)){
+            unlink($this->tempFilename);
+        }
+    }
+
+    public function getUploadDir()
+    {
+        return 'uploads/img';
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    public function getWebPath()
+    {
+        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
     }
 }
 

@@ -15,8 +15,8 @@ class __TwigTemplate_4036f9849833959a68f6df47b4f9bbbde716ede93c3e08c71a37a3a9296
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_52335e52b6e404b93ab2b74fbb8e5e4dd6ebc87e42c2005015e0dd58c73ed4ca = $this->env->getExtension("native_profiler");
-        $__internal_52335e52b6e404b93ab2b74fbb8e5e4dd6ebc87e42c2005015e0dd58c73ed4ca->enter($__internal_52335e52b6e404b93ab2b74fbb8e5e4dd6ebc87e42c2005015e0dd58c73ed4ca_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:form.html.twig"));
+        $__internal_3a03d1622d074de53841a6b7539ca9df31575a12605af15c342a940dc28cdea8 = $this->env->getExtension("native_profiler");
+        $__internal_3a03d1622d074de53841a6b7539ca9df31575a12605af15c342a940dc28cdea8->enter($__internal_3a03d1622d074de53841a6b7539ca9df31575a12605af15c342a940dc28cdea8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:form.html.twig"));
 
         // line 1
         echo "<h3>Formulaire d'annonce</h3>
@@ -93,9 +93,54 @@ class __TwigTemplate_4036f9849833959a68f6df47b4f9bbbde716ede93c3e08c71a37a3a9296
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
 
-</div>";
+</div>
+
+<script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script>
+
+<script type=\"text/javascript\">
+\t\$(document).ready(function(){
+\t\tvar \$container = \$('div#platformbundle_advert_categories');
+\t\tvar \$addLink = \$('<a href=\"#\" id=\"add_category\" class=\"btn btn-default\">Ajouter une catégorie</a>');
+\t\t\$container.append(\$addLink);
+\t\t\$addLink.click(function(e) {
+\t\t\taddCategory(\$container);
+\t\t\te.preventDefault();
+\t\t\treturn false;
+\t\t});
+\t\tvar index = \$container.find(':input').length;
+
+\t\tif (index == 0) {
+\t\t\taddCategory(\$container);
+\t\t} else {
+\t\t\t\$container.children('div').each(function(){
+\t\t\t\taddDeleteLink(\$(this));
+\t\t\t});
+\t\t}
+
+\t\tfunction addCategory(\$container){
+\t\t\tvar \$prototype = \$(\$container.attr('data-prototype').replace(/__name__label__/g, 'Catégorie n°' + (index+1)).replace(/__name__/g, index));
+\t\t\taddDeleteLink(\$prototype);
+\t\t\t\$container.append(\$prototype);
+\t\t\tindex++;
+\t\t}
+
+\t\tfunction addDeleteLink(\$prototype){
+\t\t\t\$deleteLink = \$('<a href=\"#\" class=\"btn btn-danger\">Supprimer</a>');
+\t\t\t\$prototype.append(\$deleteLink);
+\t\t\t\$deleteLink.click(function(e){
+\t\t\t\t\$prototype.remove();
+\t\t\t\te.preventDefault();
+\t\t\t\treturn false;
+\t\t\t});
+
+\t\t}
+
+\t});
+
+
+</script>";
         
-        $__internal_52335e52b6e404b93ab2b74fbb8e5e4dd6ebc87e42c2005015e0dd58c73ed4ca->leave($__internal_52335e52b6e404b93ab2b74fbb8e5e4dd6ebc87e42c2005015e0dd58c73ed4ca_prof);
+        $__internal_3a03d1622d074de53841a6b7539ca9df31575a12605af15c342a940dc28cdea8->leave($__internal_3a03d1622d074de53841a6b7539ca9df31575a12605af15c342a940dc28cdea8_prof);
 
     }
 
@@ -147,3 +192,48 @@ class __TwigTemplate_4036f9849833959a68f6df47b4f9bbbde716ede93c3e08c71a37a3a9296
 /* 	{{ form_end(form) }}*/
 /* */
 /* </div>*/
+/* */
+/* <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>*/
+/* */
+/* <script type="text/javascript">*/
+/* 	$(document).ready(function(){*/
+/* 		var $container = $('div#platformbundle_advert_categories');*/
+/* 		var $addLink = $('<a href="#" id="add_category" class="btn btn-default">Ajouter une catégorie</a>');*/
+/* 		$container.append($addLink);*/
+/* 		$addLink.click(function(e) {*/
+/* 			addCategory($container);*/
+/* 			e.preventDefault();*/
+/* 			return false;*/
+/* 		});*/
+/* 		var index = $container.find(':input').length;*/
+/* */
+/* 		if (index == 0) {*/
+/* 			addCategory($container);*/
+/* 		} else {*/
+/* 			$container.children('div').each(function(){*/
+/* 				addDeleteLink($(this));*/
+/* 			});*/
+/* 		}*/
+/* */
+/* 		function addCategory($container){*/
+/* 			var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Catégorie n°' + (index+1)).replace(/__name__/g, index));*/
+/* 			addDeleteLink($prototype);*/
+/* 			$container.append($prototype);*/
+/* 			index++;*/
+/* 		}*/
+/* */
+/* 		function addDeleteLink($prototype){*/
+/* 			$deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');*/
+/* 			$prototype.append($deleteLink);*/
+/* 			$deleteLink.click(function(e){*/
+/* 				$prototype.remove();*/
+/* 				e.preventDefault();*/
+/* 				return false;*/
+/* 			});*/
+/* */
+/* 		}*/
+/* */
+/* 	});*/
+/* */
+/* */
+/* </script>*/

@@ -22,20 +22,20 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_ef2b9f8f3608a9b3f68008c3b6bb336d9d0bf05cace8cb43d367a06d12cc4949 = $this->env->getExtension("native_profiler");
-        $__internal_ef2b9f8f3608a9b3f68008c3b6bb336d9d0bf05cace8cb43d367a06d12cc4949->enter($__internal_ef2b9f8f3608a9b3f68008c3b6bb336d9d0bf05cace8cb43d367a06d12cc4949_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:view.html.twig"));
+        $__internal_0a63cc297e5174bc1e4888cab298369959fd3412a764c894f41e700ee56320a0 = $this->env->getExtension("native_profiler");
+        $__internal_0a63cc297e5174bc1e4888cab298369959fd3412a764c894f41e700ee56320a0->enter($__internal_0a63cc297e5174bc1e4888cab298369959fd3412a764c894f41e700ee56320a0_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:view.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_ef2b9f8f3608a9b3f68008c3b6bb336d9d0bf05cace8cb43d367a06d12cc4949->leave($__internal_ef2b9f8f3608a9b3f68008c3b6bb336d9d0bf05cace8cb43d367a06d12cc4949_prof);
+        $__internal_0a63cc297e5174bc1e4888cab298369959fd3412a764c894f41e700ee56320a0->leave($__internal_0a63cc297e5174bc1e4888cab298369959fd3412a764c894f41e700ee56320a0_prof);
 
     }
 
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        $__internal_7db6c2d791bca84aa21b827727c92b1eb498b61b0cfc9377b40c0a084c830732 = $this->env->getExtension("native_profiler");
-        $__internal_7db6c2d791bca84aa21b827727c92b1eb498b61b0cfc9377b40c0a084c830732->enter($__internal_7db6c2d791bca84aa21b827727c92b1eb498b61b0cfc9377b40c0a084c830732_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_6550c5553b209f8762238d80e648f876841daf8d9218b9c98d5a345ec1b5d89d = $this->env->getExtension("native_profiler");
+        $__internal_6550c5553b209f8762238d80e648f876841daf8d9218b9c98d5a345ec1b5d89d->enter($__internal_6550c5553b209f8762238d80e648f876841daf8d9218b9c98d5a345ec1b5d89d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         // line 4
         echo "\tLecture d'une annonce - ";
@@ -43,15 +43,15 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
         echo "
 ";
         
-        $__internal_7db6c2d791bca84aa21b827727c92b1eb498b61b0cfc9377b40c0a084c830732->leave($__internal_7db6c2d791bca84aa21b827727c92b1eb498b61b0cfc9377b40c0a084c830732_prof);
+        $__internal_6550c5553b209f8762238d80e648f876841daf8d9218b9c98d5a345ec1b5d89d->leave($__internal_6550c5553b209f8762238d80e648f876841daf8d9218b9c98d5a345ec1b5d89d_prof);
 
     }
 
     // line 7
     public function block_platform_body($context, array $blocks = array())
     {
-        $__internal_1b864d854f98dd8e4b75614858427a231681fec03b8ed87780474e72a0ea3012 = $this->env->getExtension("native_profiler");
-        $__internal_1b864d854f98dd8e4b75614858427a231681fec03b8ed87780474e72a0ea3012->enter($__internal_1b864d854f98dd8e4b75614858427a231681fec03b8ed87780474e72a0ea3012_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "platform_body"));
+        $__internal_cb58d9fe26e43a35c47c125250d993bbf0f26e7edf603bbb71f13e8e1480fbfd = $this->env->getExtension("native_profiler");
+        $__internal_cb58d9fe26e43a35c47c125250d993bbf0f26e7edf603bbb71f13e8e1480fbfd->enter($__internal_cb58d9fe26e43a35c47c125250d993bbf0f26e7edf603bbb71f13e8e1480fbfd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "platform_body"));
 
         // line 8
         echo "
@@ -71,16 +71,22 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
         // line 13
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["advert"]) ? $context["advert"] : $this->getContext($context, "advert")), "content", array()), "html", null, true);
         echo "
+\t\t<img src=\"";
+        // line 14
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl($this->getAttribute($this->getAttribute((isset($context["advert"]) ? $context["advert"] : $this->getContext($context, "advert")), "image", array()), "webPath", array())), "html", null, true);
+        echo "\" alt=\"";
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["advert"]) ? $context["advert"] : $this->getContext($context, "advert")), "image", array()), "alt", array()), "html", null, true);
+        echo "\">
 \t</div>
 
 \t";
-        // line 16
+        // line 17
         if ( !$this->getAttribute($this->getAttribute((isset($context["advert"]) ? $context["advert"] : $this->getContext($context, "advert")), "categories", array()), "empty", array())) {
-            // line 17
+            // line 18
             echo "\t\t<p>
 \t\t\tCette annonce est parue dans les catégories suivantes :
 \t\t\t";
-            // line 19
+            // line 20
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["advert"]) ? $context["advert"] : $this->getContext($context, "advert")), "categories", array()));
             $context['loop'] = array(
@@ -97,13 +103,13 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
                 $context['loop']['last'] = 1 === $length;
             }
             foreach ($context['_seq'] as $context["_key"] => $context["category"]) {
-                // line 20
+                // line 21
                 echo "\t\t\t";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["category"], "name", array()), "html", null, true);
                 if ( !$this->getAttribute($context["loop"], "last", array())) {
                     echo ", ";
                 }
-                // line 21
+                // line 22
                 echo "\t\t\t";
                 ++$context['loop']['index0'];
                 ++$context['loop']['index'];
@@ -117,25 +123,25 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['category'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 22
+            // line 23
             echo "\t\t</p>
 \t";
         }
-        // line 24
+        // line 25
         echo "
 \t";
-        // line 25
+        // line 26
         if ((twig_length_filter($this->env, (isset($context["listAdvertSkills"]) ? $context["listAdvertSkills"] : $this->getContext($context, "listAdvertSkills"))) > 0)) {
-            // line 26
+            // line 27
             echo "\t\t<div>
 \t\t\tCette annonce requiert les compétences suivantes :
 \t\t\t<ul>
 \t\t\t\t";
-            // line 29
+            // line 30
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["listAdvertSkills"]) ? $context["listAdvertSkills"] : $this->getContext($context, "listAdvertSkills")));
             foreach ($context['_seq'] as $context["_key"] => $context["advertSkill"]) {
-                // line 30
+                // line 31
                 echo "\t\t\t\t<li>";
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["advertSkill"], "skill", array()), "name", array()), "html", null, true);
                 echo " : niveau ";
@@ -146,30 +152,30 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['advertSkill'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 32
+            // line 33
             echo "\t\t\t</ul>
 \t\t</div>
 \t";
         }
-        // line 35
+        // line 36
         echo "
 \t<p>
 \t\t<a href=\"";
-        // line 37
+        // line 38
         echo $this->env->getExtension('routing')->getPath("platform_home");
         echo "\" class=\"btn btn-default\">
 \t\t\t<i class=\"glyphicon glyphicon-chevron-left\"></i>
 \t\t\tRetour à la liste
 \t\t</a>
 \t\t<a href=\"";
-        // line 41
+        // line 42
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("platform_edit", array("id" => $this->getAttribute((isset($context["advert"]) ? $context["advert"] : $this->getContext($context, "advert")), "id", array()))), "html", null, true);
         echo "\" class=\"btn btn-default\">
 \t\t\t<i class=\"glyphicon glyphicon-edit\"></i>
 \t\t\tModifier l'annonce
 \t\t</a>
 \t\t<a href=\"";
-        // line 45
+        // line 46
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("platform_delete", array("id" => $this->getAttribute((isset($context["advert"]) ? $context["advert"] : $this->getContext($context, "advert")), "id", array()))), "html", null, true);
         echo "\" class=\"btn btn-danger\">
 \t\t\t<i class=\"glyphicon glyphicon-trash\"></i>
@@ -179,7 +185,7 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
 
 ";
         
-        $__internal_1b864d854f98dd8e4b75614858427a231681fec03b8ed87780474e72a0ea3012->leave($__internal_1b864d854f98dd8e4b75614858427a231681fec03b8ed87780474e72a0ea3012_prof);
+        $__internal_cb58d9fe26e43a35c47c125250d993bbf0f26e7edf603bbb71f13e8e1480fbfd->leave($__internal_cb58d9fe26e43a35c47c125250d993bbf0f26e7edf603bbb71f13e8e1480fbfd_prof);
 
     }
 
@@ -195,7 +201,7 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
 
     public function getDebugInfo()
     {
-        return array (  173 => 45,  166 => 41,  159 => 37,  155 => 35,  150 => 32,  139 => 30,  135 => 29,  130 => 26,  128 => 25,  125 => 24,  121 => 22,  107 => 21,  101 => 20,  84 => 19,  80 => 17,  78 => 16,  72 => 13,  64 => 10,  60 => 9,  57 => 8,  51 => 7,  41 => 4,  35 => 3,  11 => 1,);
+        return array (  179 => 46,  172 => 42,  165 => 38,  161 => 36,  156 => 33,  145 => 31,  141 => 30,  136 => 27,  134 => 26,  131 => 25,  127 => 23,  113 => 22,  107 => 21,  90 => 20,  86 => 18,  84 => 17,  76 => 14,  72 => 13,  64 => 10,  60 => 9,  57 => 8,  51 => 7,  41 => 4,  35 => 3,  11 => 1,);
     }
 }
 /* {% extends "LamaDelRayPlatformBundle::layout.html.twig" %}*/
@@ -211,6 +217,7 @@ class __TwigTemplate_d713e05d6f104bd0832f7f6667e47a9041f4a6bfe31f07cc8c636313aa7
 /* */
 /* 	<div class="well">*/
 /* 		{{ advert.content }}*/
+/* 		<img src="{{ asset(advert.image.webPath) }}" alt="{{ advert.image.alt }}">*/
 /* 	</div>*/
 /* */
 /* 	{% if not advert.categories.empty %}*/

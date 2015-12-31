@@ -64,10 +64,10 @@ class Image extends \LamaDelRay\PlatformBundle\Entity\Image implements \Doctrine
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'id', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'url', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'alt');
+            return array('__isInitialized__', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'id', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'url', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'alt', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'file', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'tempFilename');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'id', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'url', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'alt');
+        return array('__isInitialized__', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'id', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'url', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'alt', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'file', '' . "\0" . 'LamaDelRay\\PlatformBundle\\Entity\\Image' . "\0" . 'tempFilename');
     }
 
     /**
@@ -230,6 +230,94 @@ class Image extends \LamaDelRay\PlatformBundle\Entity\Image implements \Doctrine
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAlt', array());
 
         return parent::getAlt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFile()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFile', array());
+
+        return parent::getFile();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setFile(\Symfony\Component\HttpFoundation\File\UploadedFile $file)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFile', array($file));
+
+        return parent::setFile($file);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function preUpload()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'preUpload', array());
+
+        return parent::preUpload();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function upload()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'upload', array());
+
+        return parent::upload();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function preRemoveUpload()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'preRemoveUpload', array());
+
+        return parent::preRemoveUpload();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeUpload()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeUpload', array());
+
+        return parent::removeUpload();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUploadDir()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUploadDir', array());
+
+        return parent::getUploadDir();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getWebPath()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getWebPath', array());
+
+        return parent::getWebPath();
     }
 
 }

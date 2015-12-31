@@ -5,6 +5,8 @@ namespace LamaDelRay\PlatformBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use LamaDelRay\PlatformBundle\Repository\AdvertRepository;
+
 
 class CategoryType extends AbstractType
 {
@@ -17,6 +19,14 @@ class CategoryType extends AbstractType
         $builder
             ->add('name')
         ;
+
+        $builder->add('advert', 'entity', array(
+            'class'         => 'LamaDelRayPlatformBundle:Advert',
+            'property'      =>  'title',
+            'query_builder' => function(AdvertRepository $repo) {
+            return $repo->getPublishedQueryBuilder();
+            }
+        ));
     }
     
     /**

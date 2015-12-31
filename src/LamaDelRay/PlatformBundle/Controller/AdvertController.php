@@ -58,11 +58,9 @@ class AdvertController extends Controller
 	public function addAction(Request $request)
 	{
 		$advert = new Advert();
-		$advert->setDate(new \Datetime());
-		$form = $this->createForm(new AdvertType(),$advert);
+		$form = $this->createForm(new AdvertType(), $advert);
 
-		$form->handleRequest($request);
-		if ($form->isValid()){
+		if ($form->handleRequest($request)->isValid()){
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($advert);
 			$em->flush();
@@ -78,21 +76,26 @@ class AdvertController extends Controller
 	public function editAction($id, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
-
 		$advert = $em->getRepository('LamaDelRayPlatformBundle:Advert')->find($id);
 
 		if ($advert === null){
 			throw new NotFoundHttpException("l'annonce d'id ".$id." n'existe pas.");
 		}
+		$form = $this->createForm(new AdvertEditType(), $advert);
 
-		$formBuilder = $this->get('form.factory')->createBuilder('form', $advert);
+		if ($form->handleRequest($request)->isValid()){
+			$em->flush();
+			$request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
+			return $this->redirect($this->generateUrl('platform_view', array('id' => $advert->getId())));
+		}
 
 		return $this->render('LamaDelRayPlatformBundle:Advert:edit.html.twig', array(
+			'form'	 => $form->createView(),
 			'advert' => $advert
 		));
 	}
 
-	public function deleteAction($id)
+	public function deleteAction($id, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 
@@ -101,14 +104,18 @@ class AdvertController extends Controller
 		if ( $advert === null){
 			throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
 		}
+		$form = $this->createFormBuilder()->getForm();
 
-		if ($request->isMethod('POST')){
+		if ($form->handleRequest($request)->isValid()){
+			$em->remove($advert);
+			$em->flush();
 			$request->getSession()->getFlashBag()->add('info', 'Annonce bien supprimée.');
 			return $this->redirect($this->generateUrl('platform_home'));
 		}
 
 		return $this->render('LamaDelRayPlatformBundle:Advert:delete.html.twig', array(
-			'advert' => $advert
+			'advert' => $advert,
+			'form'	 => $form->createView()
 		));
 	}
 

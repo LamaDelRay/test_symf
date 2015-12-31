@@ -11,6 +11,7 @@
 
 	<div class="well">
 		{{ advert.content }}
+		<img src="{{ asset(advert.image.webPath) }}" alt="{{ advert.image.alt }}">
 	</div>
 
 	{% if not advert.categories.empty %}
