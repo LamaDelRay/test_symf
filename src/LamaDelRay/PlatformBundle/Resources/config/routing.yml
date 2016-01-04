@@ -6,7 +6,6 @@ platform_home:
     requirements:
         page: \d*
 
-
 platform_view:
     path:	/advert/{id}
     defaults:	{ _controller : LamaDelRayPlatformBundle:Advert:view }

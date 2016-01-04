@@ -32,7 +32,7 @@ class AntifloodValidator extends ConstraintValidator
 
 	public function isFlood($ip, $time)
 	{
+		$this->context->addViolation($constraint->message);
 		return NULL;
-
 	}
 }

@@ -18,11 +18,17 @@
 				{{ form_widget(form.content, {'attr': {'class' : 'form-control'}}) }}
 			</div>
 		</div>
-	{{ form_row(form.date) }}
+	{% if form.date is defined %}
+		{{ form_row(form.date) }}
+	{% endif %}
 
-	{{ form_row(form.author) }}
+	{% if form.author is defined %}
+		{{ form_row(form.author) }}
+	{% endif %}
 
-	{{ form_row(form.published) }}
+	{% if form.published is defined %}
+		{{ form_row(form.published) }}
+	{% endif %}
 
 	{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
 

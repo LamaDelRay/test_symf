@@ -5,19 +5,24 @@ namespace LamaDelRay\PlatformBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use LamaDelRay\PlatformBundle\Entity\Advert;
 use LamaDelRay\PlatformBundle\Form\AdvertType;
+use LamaDelRay\PlatformBundle\Form\AdvertEditType;
 use LamaDelRay\PlatformBundle\Entity\Application;
 use LamaDelRay\PlatformBundle\Entity\AdvertSkill;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 class AdvertController extends Controller
 {
 	public function indexAction($page)
 	{
-		if ($page < 1) {
+		if ($page < 0) {
 			throw new NotFoundHttpException('Page "'.$page.'" inexistante');
 		}
 
@@ -26,9 +31,9 @@ class AdvertController extends Controller
 		$listAdverts = $this->getDoctrine()->getManager()->getRepository('LamaDelRayPlatformBundle:Advert')->getAdverts($page, $nbPerPage);
 
 		$nbPages = ceil(count($listAdverts)/$nbPerPage);
-		if ($page > $nbPages) {
-			throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-		}
+		// if ($page > $nbPages) {
+		// 	throw $this->createNotFoundException("La page ".$page." n'existe pas. ".count($listAdverts));
+		// }
 
 		return $this->render('LamaDelRayPlatformBundle:Advert:index.html.twig', array(
 			'listAdverts' => $listAdverts,
@@ -55,12 +60,18 @@ class AdvertController extends Controller
 		));
 	}
 
+
+
 	public function addAction(Request $request)
 	{
 		$advert = new Advert();
 		$form = $this->createForm(new AdvertType(), $advert);
 
 		if ($form->handleRequest($request)->isValid()){
+			$event = new MessagePostEvent($advert->getContent(), $advert->getUser());
+
+			$this->get('event_dispatcher')->dispatch(BigbtoyherEvents::onMessagePost,$event);
+			$advert->setContent($event->getMessage());
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($advert);
 			$em->flush();

@@ -1,4 +1,4 @@
-{% extends "LamaDelRayPlatformBundle::layout.html.twig" %}
+{% extends "LamaDelRayPlatformBundle::layout2.html.twig" %}
 
 {% block title %}
 	Lecture d'une annonce - {{ parent() }}
@@ -11,7 +11,9 @@
 
 	<div class="well">
 		{{ advert.content }}
+		{% if advert.image != null %}
 		<img src="{{ asset(advert.image.webPath) }}" alt="{{ advert.image.alt }}">
+		{% endif %}
 	</div>
 
 	{% if not advert.categories.empty %}

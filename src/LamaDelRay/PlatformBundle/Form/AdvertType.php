@@ -21,7 +21,7 @@ class AdvertType extends AbstractType
         $builder
         ->add('date', 'date')->add('title', 'text')
         ->add('content', 'textarea')->add('author','text')
-        ->add('image', new ImageType())
+        ->add('image', new ImageType(), array('required' => false))
         ->add('categories', 'entity', array(
             'class'      => 'LamaDelRayPlatformBundle:Category',
             'property' =>  'name',

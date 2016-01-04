@@ -15,8 +15,8 @@ class __TwigTemplate_4036f9849833959a68f6df47b4f9bbbde716ede93c3e08c71a37a3a9296
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_3a03d1622d074de53841a6b7539ca9df31575a12605af15c342a940dc28cdea8 = $this->env->getExtension("native_profiler");
-        $__internal_3a03d1622d074de53841a6b7539ca9df31575a12605af15c342a940dc28cdea8->enter($__internal_3a03d1622d074de53841a6b7539ca9df31575a12605af15c342a940dc28cdea8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:form.html.twig"));
+        $__internal_2bd1d71df495f19838949526a7bf81c0292918b4a402baab202ae4a8b81a083d = $this->env->getExtension("native_profiler");
+        $__internal_2bd1d71df495f19838949526a7bf81c0292918b4a402baab202ae4a8b81a083d->enter($__internal_2bd1d71df495f19838949526a7bf81c0292918b4a402baab202ae4a8b81a083d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:form.html.twig"));
 
         // line 1
         echo "<h3>Formulaire d'annonce</h3>
@@ -65,31 +65,49 @@ class __TwigTemplate_4036f9849833959a68f6df47b4f9bbbde716ede93c3e08c71a37a3a9296
 \t\t</div>
 \t";
         // line 21
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "date", array()), 'row');
-        echo "
-
+        if ($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "date", array(), "any", true, true)) {
+            // line 22
+            echo "\t\t";
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "date", array()), 'row');
+            echo "
 \t";
-        // line 23
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "author", array()), 'row');
+        }
+        // line 24
         echo "
-
 \t";
         // line 25
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "published", array()), 'row');
-        echo "
-
+        if ($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "author", array(), "any", true, true)) {
+            // line 26
+            echo "\t\t";
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "author", array()), 'row');
+            echo "
 \t";
-        // line 27
+        }
+        // line 28
+        echo "
+\t";
+        // line 29
+        if ($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "published", array(), "any", true, true)) {
+            // line 30
+            echo "\t\t";
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "published", array()), 'row');
+            echo "
+\t";
+        }
+        // line 32
+        echo "
+\t";
+        // line 33
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "save", array()), 'widget', array("attr" => array("class" => "btn btn-primary")));
         echo "
 
 \t";
-        // line 29
+        // line 35
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'rest');
         echo "
 
 \t";
-        // line 31
+        // line 37
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
 
@@ -140,7 +158,7 @@ class __TwigTemplate_4036f9849833959a68f6df47b4f9bbbde716ede93c3e08c71a37a3a9296
 
 </script>";
         
-        $__internal_3a03d1622d074de53841a6b7539ca9df31575a12605af15c342a940dc28cdea8->leave($__internal_3a03d1622d074de53841a6b7539ca9df31575a12605af15c342a940dc28cdea8_prof);
+        $__internal_2bd1d71df495f19838949526a7bf81c0292918b4a402baab202ae4a8b81a083d->leave($__internal_2bd1d71df495f19838949526a7bf81c0292918b4a402baab202ae4a8b81a083d_prof);
 
     }
 
@@ -156,7 +174,7 @@ class __TwigTemplate_4036f9849833959a68f6df47b4f9bbbde716ede93c3e08c71a37a3a9296
 
     public function getDebugInfo()
     {
-        return array (  93 => 31,  88 => 29,  83 => 27,  78 => 25,  73 => 23,  68 => 21,  62 => 18,  57 => 16,  53 => 15,  45 => 10,  40 => 8,  36 => 7,  31 => 5,  27 => 4,  22 => 1,);
+        return array (  111 => 37,  106 => 35,  101 => 33,  98 => 32,  92 => 30,  90 => 29,  87 => 28,  81 => 26,  79 => 25,  76 => 24,  70 => 22,  68 => 21,  62 => 18,  57 => 16,  53 => 15,  45 => 10,  40 => 8,  36 => 7,  31 => 5,  27 => 4,  22 => 1,);
     }
 }
 /* <h3>Formulaire d'annonce</h3>*/
@@ -179,11 +197,17 @@ class __TwigTemplate_4036f9849833959a68f6df47b4f9bbbde716ede93c3e08c71a37a3a9296
 /* 				{{ form_widget(form.content, {'attr': {'class' : 'form-control'}}) }}*/
 /* 			</div>*/
 /* 		</div>*/
-/* 	{{ form_row(form.date) }}*/
+/* 	{% if form.date is defined %}*/
+/* 		{{ form_row(form.date) }}*/
+/* 	{% endif %}*/
 /* */
-/* 	{{ form_row(form.author) }}*/
+/* 	{% if form.author is defined %}*/
+/* 		{{ form_row(form.author) }}*/
+/* 	{% endif %}*/
 /* */
-/* 	{{ form_row(form.published) }}*/
+/* 	{% if form.published is defined %}*/
+/* 		{{ form_row(form.published) }}*/
+/* 	{% endif %}*/
 /* */
 /* 	{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}*/
 /* */
