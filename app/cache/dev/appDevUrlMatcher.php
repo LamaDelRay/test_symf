@@ -105,49 +105,43 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        if (0 === strpos($pathinfo, '/platform')) {
-            // platform_home
-            if (preg_match('#^/platform(?:/(?P<page>\\d*))?$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_home')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::indexAction',  'page' => 1,));
+        // platform_home
+        if (preg_match('#^/(?P<_locale>en|fr)/platform(?:/(?P<page>\\d*))?$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_home')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::indexAction',  'page' => 1,));
+        }
+
+        // platform_view
+        if (preg_match('#^/(?P<_locale>en|fr)/platform/advert/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_view')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::viewAction',));
+        }
+
+        // platform_add
+        if (preg_match('#^/(?P<_locale>en|fr)/platform/add$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_add')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::addAction',));
+        }
+
+        // platform_edit
+        if (preg_match('#^/(?P<_locale>en|fr)/platform/edit/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_edit')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::editAction',));
+        }
+
+        // platform_delete
+        if (preg_match('#^/(?P<_locale>en|fr)/platform/delete/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_delete')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::deleteAction',));
+        }
+
+        // platform_view_slug
+        if (preg_match('#^/(?P<_locale>en|fr)/platform/(?P<year>\\d{4})/(?P<slug>[^/\\.]++)(?:\\.(?P<format>html|xml))?$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_view_slug')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::viewSlugAction',  'format' => 'html',));
+        }
+
+        // hello_world
+        if (preg_match('#^/(?P<_locale>en|fr)/platform/hello_world/?$#s', $pathinfo, $matches)) {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'hello_world');
             }
 
-            if (0 === strpos($pathinfo, '/platform/ad')) {
-                // platform_view
-                if (0 === strpos($pathinfo, '/platform/advert') && preg_match('#^/platform/advert/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_view')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::viewAction',));
-                }
-
-                // platform_add
-                if ($pathinfo === '/platform/add') {
-                    return array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::addAction',  '_route' => 'platform_add',);
-                }
-
-            }
-
-            // platform_edit
-            if (0 === strpos($pathinfo, '/platform/edit') && preg_match('#^/platform/edit/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_edit')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::editAction',));
-            }
-
-            // platform_delete
-            if (0 === strpos($pathinfo, '/platform/delete') && preg_match('#^/platform/delete/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_delete')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::deleteAction',));
-            }
-
-            // platform_view_slug
-            if (preg_match('#^/platform/(?P<year>\\d{4})/(?P<slug>[^/\\.]++)(?:\\.(?P<format>html|xml))?$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_view_slug')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::viewSlugAction',  'format' => 'html',));
-            }
-
-            // hello_world
-            if (rtrim($pathinfo, '/') === '/platform/hello_world') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'hello_world');
-                }
-
-                return array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::indexAction',  '_route' => 'hello_world',);
-            }
-
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'hello_world')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::indexAction',));
         }
 
         if (0 === strpos($pathinfo, '/log')) {
@@ -335,6 +329,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'FOS\\UserBundle\\Controller\\ChangePasswordController::changePasswordAction',  '_route' => 'fos_user_change_password',);
         }
         not_fos_user_change_password:
+
+        // platform_translation
+        if (preg_match('#^/(?P<_locale>[^/]++)/traduction/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_translation')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::translationAction',));
+        }
+
+        // platform_paramconverter
+        if (0 === strpos($pathinfo, '/test') && preg_match('#^/test/(?P<json>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'platform_paramconverter')), array (  '_controller' => 'LamaDelRay\\PlatformBundle\\Controller\\AdvertController::ParamConverterAction',));
+        }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }

@@ -207,6 +207,10 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Account is disabled.' => 'Account is disabled.',
     'Account is locked.' => 'Account is locked.',
   ),
+  'messages' => 
+  array (
+    'Bonjour' => 'Hello',
+  ),
   'FOSUserBundle' => 
   array (
     'group.edit.submit' => 'Update group',

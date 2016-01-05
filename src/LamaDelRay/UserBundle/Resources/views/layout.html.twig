@@ -3,9 +3,11 @@
 {% block body %}
 
 	{% for key, message in app.session.flashbag.all() %}
-		<div class="alert alert-{{ key }}">
-			{{ message|trans({}, 'FPSIserBundle') }}
-		</div>
+		{% for message in messages %}
+			<div class="alert alert-{{ key }}">
+				{{ message|trans({}, 'FPSIserBundle') }}
+			</div>
+		{% endfor %}
 	{% endfor %}
 
 	{% block fos_user_content %}

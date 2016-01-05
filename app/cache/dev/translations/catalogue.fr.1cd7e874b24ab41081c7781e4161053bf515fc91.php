@@ -123,6 +123,10 @@ $catalogue = new MessageCatalogue('fr', array (
     'Account is disabled.' => 'Le compte est désactivé.',
     'Account is locked.' => 'Le compte est bloqué.',
   ),
+  'messages' => 
+  array (
+    'Hello' => 'Bonjour',
+  ),
   'FOSUserBundle' => 
   array (
     'group.edit.submit' => 'Mettre à jour le groupe',
@@ -305,6 +309,10 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Credentials have expired.' => 'Credentials have expired.',
     'Account is disabled.' => 'Account is disabled.',
     'Account is locked.' => 'Account is locked.',
+  ),
+  'messages' => 
+  array (
+    'Bonjour' => 'Hello',
   ),
   'FOSUserBundle' => 
   array (

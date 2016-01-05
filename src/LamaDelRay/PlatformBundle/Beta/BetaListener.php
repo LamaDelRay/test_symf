@@ -22,9 +22,6 @@ class BetaListener
 		$this->endDate  = new \Datetime($endDate);
 	}
 
-
-
-	
 	public function ignoreBeta()
 	{
 		return;
@@ -46,5 +43,6 @@ class BetaListener
 
 		$response = $this->betaHTML->displayBeta($event->getResponse(), $remainingDays);
 		$event->setResponse($response);
+		// $event->stopPropagation();
 	}
 }

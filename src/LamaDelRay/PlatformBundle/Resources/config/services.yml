@@ -4,7 +4,7 @@ services:
 #        arguments: [@service_id, "plain_value", %parameter%]
 
 services:
-    LamaDelRay_platform.doctrine.notificqtion:
+    LamaDelRay_platform.doctrine.notification:
         class: LamaDelRay\PlatformBundle\DoctrineListener\ApplicationNotification
         arguments: [@mailer]
         tags:
@@ -33,9 +33,9 @@ services:
 
     platform.beta.listener:
        class: LamaDelRay\PlatformBundle\Beta\BetaListener
-       arguments: [@platform.beta.html, "2016-10-20"]
+       arguments: [@platform.beta.html, "2016-01-20"]
        tags:
-           - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+           - { name: kernel.event_listener, event: kernel.response, method: processBeta, priority: 2 }
            - { name: kernel.event_listener, event: kernel.controller, method: ignoreBeta }
 
     platform.censorship_processor:
@@ -48,3 +48,13 @@ services:
         tags:
             - { name: kernel.event_listener, event: platform.bigbrother.post_message, method: processMessage }
 
+    platform.bigbrother.censorship_listener:
+        class:      LamaDelRay\PlatformBundle\Bigbrother\CensorshipListener
+        arguments:  [@platform.censorship_processor, [1, 2, 3]]
+        tags:
+            - { name: kernel.event_suscriber }
+
+    platform.json_paramconverter:
+        class: LamaDelRay\PlatformBundle\ParamConverter\JsonParamConverter
+        tags:
+            - { name: request.param_converter }

@@ -16,7 +16,7 @@ use LamaDelRay\PlatformBundle\Form\AdvertEditType;
 use LamaDelRay\PlatformBundle\Entity\Application;
 use LamaDelRay\PlatformBundle\Entity\AdvertSkill;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class AdvertController extends Controller
 {
@@ -31,9 +31,9 @@ class AdvertController extends Controller
 		$listAdverts = $this->getDoctrine()->getManager()->getRepository('LamaDelRayPlatformBundle:Advert')->getAdverts($page, $nbPerPage);
 
 		$nbPages = ceil(count($listAdverts)/$nbPerPage);
-		// if ($page > $nbPages) {
-		// 	throw $this->createNotFoundException("La page ".$page." n'existe pas. ".count($listAdverts));
-		// }
+		if ($page > $nbPages) {
+			throw $this->createNotFoundException("La page ".$page." n'existe pas. ");
+		}
 
 		return $this->render('LamaDelRayPlatformBundle:Advert:index.html.twig', array(
 			'listAdverts' => $listAdverts,
@@ -42,21 +42,39 @@ class AdvertController extends Controller
 		));
 	}
 
-	public function viewAction($id, Request $request)
-	{
+	/*																													*\
+		methode sans passer $advert en parametre :
+
 		$em = $this->getDoctrine()->getManager();
 		$advert = $em->getRepository('LamaDelRayPlatformBundle:Advert')->find($id);
-
-		if ($advert === null){
-			throw new NotFoundHttpException("L'annonce d'id".$id." n'existe pas.");
+			if ($advert === null){
+			throw new NotFoundHttpException("L'annonce d'id". $advert->getId() ." n'existe pas.");
 		}
 
-		// $listApplications = $em->getRepository('LamaDelRayPlatformBundle:Application')->findBy(array('advert' => $advert));
-		$listAdvertSkills = $em->getRepository('LamaDelRayPlatformBundle:AdvertSkill')->findBy(array('advert' => $advert));
 
+		$listApplications = $em->getRepository('LamaDelRayPlatformBundle:Application')->findBy(array('advert' => $advert));
+		$listAdvertSkills = $em->getRepository('LamaDelRayPlatformBundle:AdvertSkill')->findBy(array('advert' => $advert));
+		et rajouter  'listAdvertSkills'	=> $listAdvertSkills au return final
+			--------------------------
+		A mettre dans view.html.twig
+				{% if listAdvertSkills|length > 0 %}
+		<div>
+			Cette annonce requiert les compétences suivantes :
+			<ul>
+				{% for advertSkill in listAdvertSkills %}
+				<li>{{ advertSkill.skill.name }} : niveau {{ advertSkill.level }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %} 
+	\*																													*/
+
+
+
+	public function viewAction(Advert $advert)
+	{
 		return $this->render('LamaDelRayPlatformBundle:Advert:view.html.twig', array(
 			'advert' 			=> $advert,
-			'listAdvertSkills'	=> $listAdvertSkills
 		));
 	}
 
@@ -151,6 +169,19 @@ class AdvertController extends Controller
             "On pourrait afficher l'annonce correspondant au
             slug '".$slug."', créée en ".$year." et au format ".$format."."
         );
+    }
+
+    public function translationAction($name)
+    {
+    	return $this->render('LamaDelRayPlatformBundle:Advert:translation.html.twig', array(
+    		'name' => $name
+    	));
+
+    }
+
+    public function ParamConverterAction($json)
+    {
+    	return new Response(print_r($json, true));
     }
 
 }

@@ -12,3 +12,11 @@ _errors:
 
 _main:
     resource: routing.yml
+
+platform_translation:
+    path: 	/{_locale}/traduction/{name}
+    defaults: { _controller: LamaDelRayPlatformBundle:Advert:translation }
+
+platform_paramconverter:
+    path: /test/{json}
+    defaults: { _controller: "LamaDelRayPlatformBundle:Advert:ParamConverter" }
