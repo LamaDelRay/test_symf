@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 
 
 /**
@@ -407,7 +409,7 @@ class Advert
         return $this->getUser();
     }
 
-    public function isContentValid(ExecutionContextInterf $context)
+    public function isContentValid(ExecutionContextInterface $context)
     {
         $forbiddenWords = array('échec', 'abandon');
 
