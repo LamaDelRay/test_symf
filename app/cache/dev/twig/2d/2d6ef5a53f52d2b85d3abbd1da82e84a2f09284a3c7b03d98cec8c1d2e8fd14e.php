@@ -20,20 +20,20 @@ class __TwigTemplate_952740734f5ed3dc19f9ba7145f4d2195e53af3c5d769dbe64a4d49db7d
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_d976e2fbc3ca9cb554faa5334e5efc9f3d240ceaf3aadf39c5154d2b99256535 = $this->env->getExtension("native_profiler");
-        $__internal_d976e2fbc3ca9cb554faa5334e5efc9f3d240ceaf3aadf39c5154d2b99256535->enter($__internal_d976e2fbc3ca9cb554faa5334e5efc9f3d240ceaf3aadf39c5154d2b99256535_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SonataAdminBundle:CRUD:list_array.html.twig"));
+        $__internal_2bef964f1a7213d1c98214d7f12c3091abce87126d91b3f839f650fcff1385a7 = $this->env->getExtension("native_profiler");
+        $__internal_2bef964f1a7213d1c98214d7f12c3091abce87126d91b3f839f650fcff1385a7->enter($__internal_2bef964f1a7213d1c98214d7f12c3091abce87126d91b3f839f650fcff1385a7_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SonataAdminBundle:CRUD:list_array.html.twig"));
 
         $this->getParent($context)->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_d976e2fbc3ca9cb554faa5334e5efc9f3d240ceaf3aadf39c5154d2b99256535->leave($__internal_d976e2fbc3ca9cb554faa5334e5efc9f3d240ceaf3aadf39c5154d2b99256535_prof);
+        $__internal_2bef964f1a7213d1c98214d7f12c3091abce87126d91b3f839f650fcff1385a7->leave($__internal_2bef964f1a7213d1c98214d7f12c3091abce87126d91b3f839f650fcff1385a7_prof);
 
     }
 
     // line 14
     public function block_field($context, array $blocks = array())
     {
-        $__internal_9ef53e0579459b6e9e776c8d0b89caa61697bab37020eccddf5ddfa7c8bb3517 = $this->env->getExtension("native_profiler");
-        $__internal_9ef53e0579459b6e9e776c8d0b89caa61697bab37020eccddf5ddfa7c8bb3517->enter($__internal_9ef53e0579459b6e9e776c8d0b89caa61697bab37020eccddf5ddfa7c8bb3517_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "field"));
+        $__internal_77165298b5ee6cd298121db4094d5a7cc390852de44535fe16dfd2ed1be25930 = $this->env->getExtension("native_profiler");
+        $__internal_77165298b5ee6cd298121db4094d5a7cc390852de44535fe16dfd2ed1be25930->enter($__internal_77165298b5ee6cd298121db4094d5a7cc390852de44535fe16dfd2ed1be25930_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "field"));
 
         // line 15
         echo "    ";
@@ -52,7 +52,7 @@ class __TwigTemplate_952740734f5ed3dc19f9ba7145f4d2195e53af3c5d769dbe64a4d49db7d
         unset($context['_seq'], $context['_iterated'], $context['key'], $context['val'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         
-        $__internal_9ef53e0579459b6e9e776c8d0b89caa61697bab37020eccddf5ddfa7c8bb3517->leave($__internal_9ef53e0579459b6e9e776c8d0b89caa61697bab37020eccddf5ddfa7c8bb3517_prof);
+        $__internal_77165298b5ee6cd298121db4094d5a7cc390852de44535fe16dfd2ed1be25930->leave($__internal_77165298b5ee6cd298121db4094d5a7cc390852de44535fe16dfd2ed1be25930_prof);
 
     }
 

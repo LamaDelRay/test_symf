@@ -10,6 +10,7 @@ imports:
 parameters:
     locale: en
 
+
 framework:
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
@@ -59,7 +60,12 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
+        # naming_strategy: doctrine.orm.naming_strategy.underscore
+        # entity_managers:
+        #     default:
+        #         mappings:
+        #             ApplicationSonataUserBundle: ~
+        #             SonataUserBundle: ~
         auto_mapping: true
 
 # Swiftmailer Configuration
@@ -79,24 +85,95 @@ stof_doctrine_extensions:
 fos_user:
     db_driver:      orm
     firewall_name:  main
-    user_class: LamaDelRay\Sonata\UserBundle\Entity\User
+    user_class: Application\Sonata\UserBundle\Entity\User
 
     group:
         group_class:    Application\Sonata\UserBundle\Entity\Group
-        group_manager:  sonata.user.orm.group_manager
 
-    service:
-        user_manager: sonata.user.orm.user_manager
+    profile:
+        form:
+            type:               fos_user_profile
+            handler:            fos_user.profile.form.handler.default
+            name:               fos_user_profile_form
+            validation_groups:  [Authentication]
 
 sonata_user:
     security_acl: true
+
     manager_type: orm
+
+    # table:
+    #     user_group: "my_custom_user_group_association_table_name"
+
+    # impersonating:
+    #     route:      page_slug
+    #     parameters: { path: / }
+
+    # class:
+    #     user:               Application\Sonata\UserBundle\Entity\User
+    #     group:              Application\Sonata\UserBundle\Entity\Group
+
+    # admin:
+    #     user:
+    #         class:          Sonata\UserBundle\Entity\UserAdmin
+    #         controller:     SonataAdminBundle:CRUD
+
+
+    #     group:
+    #         class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
+    #         controller:     SonataAdminBundle:CRUD
+    #         translation:    SonataUserBundle
+
+    # profile:
+    #     dashboard:
+    #         groups:
+    #             id:
+    #                 label:              ~
+    #                 label_catalogue:    ~
+    #                 items:              []
+    #                 item_adds:         []
+    #                 roles:              []
+            # blocks:
+            #     type:                 ~
+            #     settings:
+
+            #         # Prototype
+            #         id:                   []
+            #     position:             right
+        # register:
+        #     form:
+        #         type:               sonata_user_registration
+        #         handler:            sonata.user.registration.form.handler.default
+        #         name:               sonata_user_registration_form
+        #         validation_groups:
+        #             - Registration
+        #             - Default
+        #     confirm:
+        #         redirect:
+        #             route:              'sonata_user_profile_show'
+        #             route_parameters:   ~
+        # menu:
+        #     - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle' }
+        #     - { route: 'sonata_user_profile_edit_authentication', label: 'link_edit_authentication', domain: 'SonataUserBundle' }
+        # form:
+        #     type:               sonata_user_profile
+        #     handler:            sonata.user.profile.form.handler.default
+        #     name:               sonata_user_profile_form
+        #     validation_groups:  [Profile]
+
+
+
+# jms_serializer:
+#     metadata:
+#         directories:
+#             - { path: %kernel.root_dir%/../vendor/sonata-project/user-bundle/Sonata/UserBundle/Resources/config/serializer/FOSUserBundle, namespace_prefix: 'FOS\UserBundle' }
 
 sonata_block:
     default_contexts: [cms]
     blocks:
         sonata.user.block.menu:
         sonata.user.block.account:
+        sonata.block.service.text:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]

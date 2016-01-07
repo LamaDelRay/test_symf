@@ -15,8 +15,8 @@ class __TwigTemplate_bc7fcd74d4c01cc0b2e8c3fabea984059259b1ae40e0828941ae092f6b4
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_b7c0767428d3b1762e47c508c6ece775b238e4cd1596fbfde1a8087bc68feb4e = $this->env->getExtension("native_profiler");
-        $__internal_b7c0767428d3b1762e47c508c6ece775b238e4cd1596fbfde1a8087bc68feb4e->enter($__internal_b7c0767428d3b1762e47c508c6ece775b238e4cd1596fbfde1a8087bc68feb4e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:email.txt.twig"));
+        $__internal_e33eaaaa2bb6cb5631bd84368a71577e37ad802f451503a7f4c8b4c970dc49f1 = $this->env->getExtension("native_profiler");
+        $__internal_e33eaaaa2bb6cb5631bd84368a71577e37ad802f451503a7f4c8b4c970dc49f1->enter($__internal_e33eaaaa2bb6cb5631bd84368a71577e37ad802f451503a7f4c8b4c970dc49f1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LamaDelRayPlatformBundle:Advert:email.txt.twig"));
 
         // line 1
         echo "Bonjour ";
@@ -28,7 +28,7 @@ la bienvenue sur notre site !
 
 Revenez nous voir souvent !";
         
-        $__internal_b7c0767428d3b1762e47c508c6ece775b238e4cd1596fbfde1a8087bc68feb4e->leave($__internal_b7c0767428d3b1762e47c508c6ece775b238e4cd1596fbfde1a8087bc68feb4e_prof);
+        $__internal_e33eaaaa2bb6cb5631bd84368a71577e37ad802f451503a7f4c8b4c970dc49f1->leave($__internal_e33eaaaa2bb6cb5631bd84368a71577e37ad802f451503a7f4c8b4c970dc49f1_prof);
 
     }
 
