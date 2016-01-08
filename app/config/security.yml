@@ -2,21 +2,19 @@
 # http://symfony.com/doc/current/book/security.html
 security:
     encoders:
-        LamaDelRay\UserBundle\Entity\User: sha512
         FOS\UserBundle\Model\UserInterface: sha512
     acl:
         connection: default
 
     role_hierarchy:
-        ROLE_ADMIN:    [ROLE_USER, ROLE_SONATA_ADMIN]
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN:    [ ROLE_USER ]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH, SONATA]
         SONATA:
             - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT
+            - ROLE_SONATA_PAGE_ADMIN_BLOCK_EDIT
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        main:
-            id: fos_user.user_provider.username
         fos_userbundle:
             id: fos_user.user_manager
 
@@ -28,7 +26,7 @@ security:
             security: false
         admin:
             pattern:            /admin(.*)
-            context:            user
+            # context:            user
             form_login:
                 provider:       fos_userbundle
                 login_path:     /admin/login
@@ -39,21 +37,6 @@ security:
                 path:           /admin/logout
             anonymous:          true
 
-        # main:
-        #     pattern:   ^/
-        #     anonymous: true
-        #     provider:  main
-        #     form_login:
-        #         login_path: fos_user_security_login
-        #         check_path: fos_user_security_check
-        #         target_path_parameter: _target_path
-        #         use_referer: true
-        #     logout:
-        #         path:   fos_user_security_logout
-        #         target: /platform
-        #     remember_me:
-        #         key:    %secret%
-
         main:
             pattern:             .*
             context:             user
@@ -63,7 +46,8 @@ security:
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   null
-            logout:             true
+            logout:             
+                handlers: ['sonata.page.cms_manager_selector']
             anonymous:          true
 
             # activate different ways to authenticate
@@ -75,12 +59,29 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
     access_control:
-        - {path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - {path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - {path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - {path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - {path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - {path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - {path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
-        - {path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # URL of FOSUserBundle which need to be available to anonymous users
+        - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # -> custom access control for the admin area of the URL
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # -> end
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # Secured part of the site
+        # This config requires being logged for the whole site and having the admin role for the admin part.
+        # Change these rules to adapt them to your needs
+        - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # - {path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - {path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - {path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - {path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - {path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - {path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - {path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        # - {path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         # - {path: ^/admin, roles: ROLE_ADMIN }

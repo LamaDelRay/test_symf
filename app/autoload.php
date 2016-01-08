@@ -10,6 +10,17 @@ error_reporting(error_reporting() & ~E_USER_DEPRECATED);
  */
 $loader = require __DIR__.'/../vendor/autoload.php';
 
+
+// $loader->registerNamespaces(array(
+//     'FOS'              => __DIR__.'/../vendor/bundles',
+//     'Sonata'           => __DIR__.'/../vendor/bundles',
+//     'Application'      => __DIR__,
+//     'Knp'              => array(
+//                           __DIR__.'/../vendor/bundles',
+//                           __DIR__.'/../vendor/knp/menu/src',
+//                           ),
+// ));
+
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
 return $loader;

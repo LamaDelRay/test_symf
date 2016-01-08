@@ -1,7 +1,0 @@
-aa6d74,127.0.0.1,GET,http://test_symf.dev/app_dev.php/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DLamaDelRayPlatformBundle%253AAdvert%253Amenu,1452182930,f2ca18,200
-f2ca18,192.168.56.1,GET,http://test_symf.dev/app_dev.php/en/platform,1452182930,,200
-d57bc1,127.0.0.1,GET,http://test_symf.dev/app_dev.php/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DLamaDelRayPlatformBundle%253AAdvert%253Amenu,1452182964,1d4a49,200
-1d4a49,192.168.56.1,GET,http://test_symf.dev/app_dev.php/register/,1452182965,,200
-bab6e5,192.168.56.1,GET,http://test_symf.dev/app_dev.php/register,1452183256,,301
-67ea2e,127.0.0.1,GET,http://test_symf.dev/app_dev.php/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DLamaDelRayPlatformBundle%253AAdvert%253Amenu,1452183261,c6e468,200
-c6e468,192.168.56.1,GET,http://test_symf.dev/app_dev.php/register/,1452183261,,200

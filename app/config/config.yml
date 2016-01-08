@@ -97,79 +97,44 @@ fos_user:
             name:               fos_user_profile_form
             validation_groups:  [Authentication]
 
+sonata_page:
+    # slugify_service:    sonata.core.slugify.cocur
+    multisite:          host
+    default_template:   default
+    templates:
+        default:    { path: 'SonataPageBundle::layout.html.twig', name: 'default' }
+        2columns:   { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
+
+    # direct_publication: false
+
+# cmf_routing:
+#     chain:
+#         routers_by_id:
+#             sonata.page.router: 150
+#             routeur.default:    100
+
 sonata_user:
     security_acl: true
 
     manager_type: orm
 
-    # table:
-    #     user_group: "my_custom_user_group_association_table_name"
+sonata_admin:
+    assets:
+        javascripts:
+            - bundles/sonataadmin/vendor/jquery/dist/jquery.min.js
+            - bundles/sonataadmin/vendor/jquery.scrollTo/jquery.scrollTo.js
+            - bundles/sonataadmin/vendor/jqueryui/ui/minified/jquery-ui.min.js
+            - bundles/sonataadmin/vendor/jqueryui/ui/minified/i18n/jquery-ui-i18n.min.js
+            - bundles/sonatapage/sonata-page.back.min.js
 
-    # impersonating:
-    #     route:      page_slug
-    #     parameters: { path: / }
-
-    # class:
-    #     user:               Application\Sonata\UserBundle\Entity\User
-    #     group:              Application\Sonata\UserBundle\Entity\Group
-
-    # admin:
-    #     user:
-    #         class:          Sonata\UserBundle\Entity\UserAdmin
-    #         controller:     SonataAdminBundle:CRUD
-
-
-    #     group:
-    #         class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
-    #         controller:     SonataAdminBundle:CRUD
-    #         translation:    SonataUserBundle
-
-    # profile:
-    #     dashboard:
-    #         groups:
-    #             id:
-    #                 label:              ~
-    #                 label_catalogue:    ~
-    #                 items:              []
-    #                 item_adds:         []
-    #                 roles:              []
-            # blocks:
-            #     type:                 ~
-            #     settings:
-
-            #         # Prototype
-            #         id:                   []
-            #     position:             right
-        # register:
-        #     form:
-        #         type:               sonata_user_registration
-        #         handler:            sonata.user.registration.form.handler.default
-        #         name:               sonata_user_registration_form
-        #         validation_groups:
-        #             - Registration
-        #             - Default
-        #     confirm:
-        #         redirect:
-        #             route:              'sonata_user_profile_show'
-        #             route_parameters:   ~
-        # menu:
-        #     - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle' }
-        #     - { route: 'sonata_user_profile_edit_authentication', label: 'link_edit_authentication', domain: 'SonataUserBundle' }
-        # form:
-        #     type:               sonata_user_profile
-        #     handler:            sonata.user.profile.form.handler.default
-        #     name:               sonata_user_profile_form
-        #     validation_groups:  [Profile]
-
-
-
-# jms_serializer:
-#     metadata:
-#         directories:
-#             - { path: %kernel.root_dir%/../vendor/sonata-project/user-bundle/Sonata/UserBundle/Resources/config/serializer/FOSUserBundle, namespace_prefix: 'FOS\UserBundle' }
+        stylesheets:
+            - bundles/sonataadmin/vendor/AdminLTE/css/font-awesome.min.css
+            - bundles/sonataadmin/vendor/jqueryui/themes/flick/jquery-ui.min.css
+            - bundles/sonatapage/sonata-page.back.min.css
 
 sonata_block:
     default_contexts: [cms]
+    context_manager:    sonata.page.block.context_manager
     blocks:
         sonata.user.block.menu:
         sonata.user.block.account:

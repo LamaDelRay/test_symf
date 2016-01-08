@@ -12,7 +12,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="LamaDelRay\UserBundle\Repository\UserRepository")
  */
-class UserZ extends BaseUser
+class UserZ 
 {
     /**
      * @var int
